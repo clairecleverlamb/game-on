@@ -6,8 +6,12 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
+const isSignedIn = require('./middleware/is-signed-in.js');
+const passUserToView = require('./middleware/pass-user-to-view.js');
 
 const authController = require('./controllers/auth.js');
+const gamesController = require('./controllers/games.js');
+const torunamentController = require('./controllers/tournements.js');
 
 const port = process.env.PORT ? process.env.PORT : '3000';
 
@@ -29,21 +33,17 @@ app.use(
   })
 );
 
+app.use(passUserToView); 
+
 app.get('/', (req, res) => {
   res.render('index.ejs', {
     user: req.session.user,
   });
 });
 
-app.get('/vip-lounge', (req, res) => {
-  if (req.session.user) {
-    res.send(`Welcome to the party ${req.session.user.username}.`);
-  } else {
-    res.send('Sorry, no guests allowed.');
-  }
-});
-
 app.use('/auth', authController);
+app.use(isSignedIn);
+// app.use('/users/:userId/games', gamesController);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
