@@ -11,7 +11,8 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 
 const authController = require('./controllers/auth.js');
 const gamesController = require('./controllers/games.js');
-const torunamentController = require('./controllers/tournements.js');
+const torunamentController = require('./controllers/tournaments.js');
+const homeController = require('./controllers/users.js'); // personal info page
 
 const port = process.env.PORT ? process.env.PORT : '3000';
 
@@ -36,13 +37,17 @@ app.use(
 app.use(passUserToView); 
 
 app.get('/', (req, res) => {
-  res.render('index.ejs', {
-    user: req.session.user,
-  });
+  if (req.session.user) {
+    res.redirect(`/users/${req.session.user._id/homes}`);
+  } else {
+    // homepage for users who are not signed in
+    res.render('index.ejs');
+  }
 });
 
 app.use('/auth', authController);
 app.use(isSignedIn);
+app.use('/users/:userId/homes', homeController);
 // app.use('/users/:userId/games', gamesController);
 
 app.listen(port, () => {
