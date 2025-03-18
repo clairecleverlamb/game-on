@@ -2,11 +2,8 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('../config/passport-config.js');
-
 const User = require('../models/user.js');
 
-router.use(passport.initialize());
-router.use(passport.session());
 
 router.get('/sign-up', (req, res) => {
   res.render('auth/sign-up.ejs');
@@ -52,7 +49,7 @@ router.post('/sign-in', async (req, res) => {
       return res.send('Login failed. Please try again.');
     }
   
-    // There is a user! Time to test their password with bcrypt
+    // There is a user, time to test their password with bcrypt
     const validPassword = bcrypt.compareSync(
       req.body.password,
       userInDatabase.password
@@ -65,8 +62,14 @@ router.post('/sign-in', async (req, res) => {
       username: userInDatabase.username,
       _id: userInDatabase._id
     };
-  
-    res.redirect('/');
+
+    // req.logIn(userInDatabase, (err) => {
+    //   if (err) {
+    //     console.log(err);
+    //     return res.redirect('/');
+    //   }
+    //   res.redirect('/');
+    // });
   } catch (error) {
     console.log(error);
     res.redirect('/');
@@ -77,9 +80,14 @@ router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email'] 
 }));
 
-router.get('/google/callback', passport.authenticate('google', {
-  successRedirect: '/',          
-  failureRedirect: '/auth/sign-in' 
-}));
+
+// Google callback route
+router.get('/google/callback',
+  passport.authenticate('google', { failureRedirect: '/auth/sign-in' }),
+  (req, res) => {
+    res.redirect('/');
+  }
+);
+
 
 module.exports = router;

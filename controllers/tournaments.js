@@ -5,3 +5,5 @@ const isSignedIn = require('../middleware/is-signed-in');
 
 
 const User = require('../models/user.js');
+
+module.exports = router;
