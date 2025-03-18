@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js');
+const isSignedIn = require('../middleware/is-signed-in');
 
 
-const isAuthenticated = (req, res, next) => {
-  if (!req.session.user) return res.redirect('/auth/sign-in');
-  next();
-};
 
-router.get('/:id', isAuthenticated, async (req, res) => {
+router.get('/:id', isSignedIn, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user) return res.status(404).send('User not found');
@@ -20,7 +17,7 @@ router.get('/:id', isAuthenticated, async (req, res) => {
 });
 
 
-router.put('/:id', isAuthenticated, async (req, res) => {
+router.put('/:id', isSignedIn, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user || user._id.toString() !== req.session.user._id) {
