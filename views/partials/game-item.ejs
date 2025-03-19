@@ -1,5 +1,5 @@
 
 <div class="game-item">
     <h3><a href="/games/<%= game._id %>"><%= game.sport %></a></h3>
-    <p>Date: <%= game.date ? new Date(game.date).toLocaleDateString() : 'TBD' %></p>
+    <p>Date: <%= game.time ? new Date(game.time).toLocaleDateString() : 'TBD' %></p>
 </div>

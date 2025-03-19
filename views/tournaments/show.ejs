@@ -7,7 +7,13 @@
 </head>
 <body>
     <%- include('../partials/header') %>
-   <h1><%= tournament.name %></h1>
+    <h1><%= tournament.name %></h1>
+    <% if (tournament.completed) { %>
+      <p style="color: red;">This tournament has ended.</p>
+    <% } else if (tournament.participants.length >= tournament.teamSize) { %>
+      <p style="color: orange;">This tournament is full.</p>
+    <% } %>
+    
     <p><strong>Sport:</strong> <%= tournament.sport %></p>
     <p><strong>Location:</strong> <%= tournament.location %></p>
     <p><strong>Start Date:</strong> <%= tournament.startDate.toLocaleString() %></p>
