@@ -56,7 +56,9 @@ app.use('/auth', authController);
 // currentUser's profile
 app.get('/profile', isSignedIn, async (req, res) => {
   try {
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.session.user._id)
+      .populate('pastGames')
+      .populate('tournamentJoined');
     if (!user) throw new Error('User not found');
     res.render('users/profile.ejs', { user });
   } catch (error) {
