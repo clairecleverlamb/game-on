@@ -4,11 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title><%= game.sport %> - Game On</title>
 </head>
 
 <body>
     <%- include('../partials/header') %>
+    <%- include('../partials/subheader', { pageTitle: game.sport, backLink: '/games' }) %>
+    <%- include('../partials/sidebar') %>
+    <div class="game-container">
     <h1><%= game.sport %></h1>
 
     <% if (game.completed) { %>
@@ -75,6 +79,7 @@
           </form>
         <% } %>
     <% } %>
+    </div>
     <%- include('../partials/footer') %>
 </body>
 </html>

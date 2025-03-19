@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games Index</title>
+    <title>All Games - Game On Sports Connect</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-
-    <h1>All Games</h1>
-    <ul>
-        <% games.forEach(game=> { %>
-            <li>
-                <a href="/games/<%= game._id %>">
-                    <%= game.sport %> at <%= game.location %>
-                </a>
-                - <%= game.time.toLocaleString() %>
-            </li>
-            <% }) %>
-    </ul>
-    <a href="/games/new">Create a New Game</a>
-
+    <%- include('../partials/header') %>
+    <%- include('../partials/subheader', { pageTitle: 'All Games', backLink: '/' }) %>
+    <%- include('../partials/sidebar') %>
+    <div class="index-container">
+        <h1>All Games</h1>
+        <% if (games && games.length > 0) { %>
+            <ul class="event-list">
+                <% games.forEach(game => { %>
+                    <li class="event-item">
+                        <a href="/games/<%= game._id %>"><%= game.sport %></a>
+                        <p><strong>Location:</strong> <%= game.location %></p>
+                        <p><strong>Time:</strong> <%= game.time.toLocaleString() %></p>
+                        <% if (game.completed) { %>
+                            <span class="status ended">Ended</span>
+                        <% } else if (game.participants.length >= game.maxPlayers) { %>
+                            <span class="status full">Full</span>
+                        <% } %>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>No games available.</p>
+        <% } %>
+    </div>
+    <%- include('../partials/footer') %>
 </body>
 </html>
