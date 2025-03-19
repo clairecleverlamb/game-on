@@ -56,6 +56,23 @@ router.get('/', isSignedIn, async (req, res) => {
   }
 });
 
+
+// GET /users/community - View all users
+router.get('/community', isSignedIn, async (req, res) => {
+  try {
+    const users = await User.find({ _id: { $ne: req.session.user._id } })
+      .select('username fullName profilePicture'); 
+    res.render('users/community.ejs', {
+      users,
+      pageTitle: 'Community',
+      backLink: '/users'
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect('/users');
+  }
+});
+
 // GET /profile/edit - Edit current user's profile
 router.get('/edit', isSignedIn, async (req, res) => {
   try {
