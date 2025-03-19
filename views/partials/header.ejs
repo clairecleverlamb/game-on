@@ -1,26 +1,16 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game On Sports Connect</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <nav>
+<nav>
     <div class="logo">
-      <a href="/">Game On Sports Connect</a>
+        <a href="/">Game On Sports Connect</a>
     </div>
     <div class="nav-links">
-      <% if (user) { %>
-        <a href="/users">Profile</a>
-        <a href="/auth/sign-out">Sign Out</a> <!-- Changed from /auth/logout -->
-      <% } else { %>
-        <a href="/auth/sign-up">Sign Up</a>
-        <a href="/auth/sign-in">Sign In</a> <!-- Changed from Login -->
-        <a href="/">Browse</a>
-      <% } %>
+        <% if (user) { %>
+            <a href="/users">Profile</a>
+            <a href="/auth/sign-out">Sign Out</a>
+            <% } else { %>
+                <a href="/auth/sign-up">Sign Up</a>
+                <a href="/auth/sign-in">Sign In</a>
+                <a href="/">Browse</a>
+            <% } %>
     </div>
-  </nav>
-  </body>
+</nav>
+</body>
