@@ -23,9 +23,12 @@
       </select><br>
 
       <label for="profilePicture">Profile Picture URL:</label>
-       <input type="text" name="profilePicture" value="<%= user.profilePicture || '' %>"><br>  
+      <input type="text" name="profilePicture" value="<%= user.profilePicture || '' %>"><br>  
 
-       <button type="submit">Save Changes</button>
+      <label for="highlightVideo">Add Highlight Video URL:</label>
+      <input type="text" name="highlightVideo" placeholder="e.g., https://www.youtube.com/watch?v=example"><br>
+
+      <button type="submit">Save Changes</button>
     </form>
     <%- include('../partials/footer') %>
 </body>

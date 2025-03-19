@@ -12,6 +12,7 @@
 
 <div class="profile-container">
   <div class="user-info">
+
     <% if (user.profilePicture) { %>
       <img src="<%= `${user.profilePicture}` %>" alt="Profile Picture" width="100">
     <% } %>
@@ -29,26 +30,35 @@
     <p><strong>Games Played:</strong> <%= user.stats.gamePlayed %></p>
     <p><strong>Wins:</strong> <%= user.stats.wins %></p>
 
-    <h3>Games Joined</h3>
+    <h3>Games Played</h3>
     <ul>
-      <% user.pastGames.forEach(game => { %>
-        <li><a href="/games/<%= game._id %>"><%= game.sport %></a></li>
+      <% user.pastGames.filter(game => game.completed).forEach(game => { %>
+        <li>
+          <a href="/games/<%= game._id %>"><%= game.sport %></a>
+          <% if (game.winner && game.winner._id.toString() === user._id.toString()) { %> (Won) <% } %>
+        </li>
       <% }) %>
     </ul>
 
     <h3>Tournaments Joined</h3>
     <ul>
       <% user.tournamentJoined.forEach(tournament => { %>
-        <li><a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a></li>
+        <li>
+          <a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a>
+          <% if (tournament.completed) { %> (Ended) <% } %>
+        </li>
       <% }) %>
     </ul>
 
     <% if (user.highlightVideos && user.highlightVideos.length > 0) { %>
-
-      <h3>Highlight Videos</h3>
-      <% user.highlightVideos.forEach(video => { %>
-        <video src="<%= video %>" controls width="200"></video>
-      <% }) %>
+        <h3>Highlight Videos</h3>
+        <% user.highlightVideos.forEach(video => { %>
+          <% if (video.includes('youtube.com') || video.includes('youtu.be')) { %>
+        <iframe width="200" height="150" src="<%= video.replace('watch?v=', 'embed/') %>" frameborder="0" allowfullscreen></iframe>
+          <% } else { %>
+            <video src="<%= video %>" controls width="200"></video>
+        <% } %>
+        <% }) %>
     <% } %>
 
     <a href="/users/edit">Edit Profile</a>
