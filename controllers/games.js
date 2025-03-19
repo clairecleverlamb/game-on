@@ -15,7 +15,12 @@ router.get('/', async (req, res) => {
     }
   });
 
-// GET /games/new - Show form to create a new game
+// GET /games/new - Show form to create new game 
+router.get('/new', isSignedIn, (req, res) => {
+    res.render('games/new.ejs');
+});
+
+// GET /games/new  - Create a new game
 router.post('/', isSignedIn, async (req, res) => {
     try {
       if (!req.session.user || !req.session.user._id) {

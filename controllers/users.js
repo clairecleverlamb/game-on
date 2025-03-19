@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     { user,
       games, 
       tournaments,
-      pageTitles: 'Your Profile',
+      pageTitle: 'Your Profile',
       backLink: '/',
      });
   } catch (error) {
@@ -36,24 +36,27 @@ router.get('/edit', async (req, res) => {
     res.render('users/edit-profile.ejs', { user });
   } catch (error) {
     console.log(error);
-    res.redirect('/profile');
+    res.redirect('/users');
   }
 });
 
 
-
-// update profile
-router.put('/', async (req, res) => {
+// update current user's profile
+router.put('/edit', isSignedIn, async (req, res) => {
   try {
     const user = await User.findById(req.session.user._id);
     if (!user) throw new Error('User not found');
     user.username = req.body.username || user.username;
+    user.fullName = req.body.fullName || user.fullName;
+    user.location = req.body.location || user.location;
+    user.sportsInterests = req.body.sportsInterests || user.sportsInterests;
+    user.profilePicture = req.body.profilePicture || user.profilePicture;
 
     await user.save();
-    res.redirect('/profile');
+    res.redirect('/users');
   } catch (error) {
     console.log(error);
-    res.redirect('/profile');
+    res.redirect('/users/edit');
   }
 });
 
@@ -72,12 +75,12 @@ router.get('/:id', isSignedIn, async (req, res) => {
       user, 
       games, 
       tournaments,
-      pageTitles: `${user.username}'s Profile`,
-      backLink: '/profile',
+      pageTitle: `${user.username}'s Profile`,
+      backLink: '/users',
     });
   } catch (error) {
     console.log(error);
-    res.redirect('/');
+    res.redirect('/users');
   }
 });
 
