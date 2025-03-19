@@ -6,15 +6,43 @@ const Game = require('../models/game.js');
 const isSignedIn = require('../middleware/is-signed-in');
 
 // GET /profile - View current user's profile
-router.get('/', async (req, res) => {
+router.get('/', isSignedIn, async (req, res) => {
   try {
     const user = await User.findById(req.session.user._id)
     .populate('pastGames')
     .populate('tournamentJoined');
     if (!user) throw new Error('User not found');
 
-    const games = await Game.find({ participants: req.session.user._id }); // fetch user's current games
-    const tournaments = await Tournament.find({ participants: req.session.user._id });
+    let gamesPlayed = 0; 
+    let wins = 0;
+    for (const game of user.pastGames){
+      if (game.completed){
+        gamesPlayed += 1;
+        if (game.winner && game.winner.toString() === user._id.toString()){
+          wins += 1; 
+        }
+      }
+    }
+    if (user.stats.gamePlayed !== gamesPlayed || user.stats.wins !== wins){
+      user.stats.gamePlayed = gamesPlayed;
+      user.stats.wins = wins;
+      await user.save();
+    }
+
+    // only upcoming games
+    const now = new Date();
+    const games = await Game.find({ 
+      participants: req.session.user._id, 
+      completed: false, 
+      time: { $gte: now } 
+    }).populate('creator');
+    const tournaments = await Tournament.find({ 
+      participants: req.session.user._id, 
+      completed: false, 
+      startDate: { $gte: now } 
+    }).populate('creator');
+
+
     res.render('users/profile.ejs', 
     { user,
       games, 
@@ -29,7 +57,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET /profile/edit - Edit current user's profile
-router.get('/edit', async (req, res) => {
+router.get('/edit', isSignedIn, async (req, res) => {
   try {
     const user = await User.findById(req.session.user._id);
     if (!user) throw new Error('User not found');
@@ -41,7 +69,7 @@ router.get('/edit', async (req, res) => {
 });
 
 
-// update current user's profile
+// PUT /users/edit - update current user's profile
 router.put('/edit', isSignedIn, async (req, res) => {
   try {
     const user = await User.findById(req.session.user._id);
@@ -51,6 +79,10 @@ router.put('/edit', isSignedIn, async (req, res) => {
     user.location = req.body.location || user.location;
     user.sportsInterests = req.body.sportsInterests || user.sportsInterests;
     user.profilePicture = req.body.profilePicture || user.profilePicture;
+    if (req.body.highlightVideo && req.body.highlightVideo.trim() !== '') { 
+      user.highlightVideos = user.highlightVideos || []; 
+      user.highlightVideos.push(req.body.highlightVideo.trim());
+    }
 
     await user.save();
     res.redirect('/users');

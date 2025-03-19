@@ -4,7 +4,7 @@ const isSignedIn = require('../middleware/is-signed-in');
 const User = require('../models/user.js');
 const Game = require('../models/game.js');
 
-// GET /games - List all games
+// GET /games - list all games
 router.get('/', async (req, res) => {
     try {
       const games = await Game.find().populate('creator');
@@ -15,12 +15,12 @@ router.get('/', async (req, res) => {
     }
   });
 
-// GET /games/new - Show form to create new game 
+// GET /games/new - show form to create new game 
 router.get('/new', isSignedIn, (req, res) => {
     res.render('games/new.ejs');
 });
 
-// GET /games/new  - Create a new game
+// GET /games/new  - create a new game
 router.post('/', isSignedIn, async (req, res) => {
     try {
       if (!req.session.user || !req.session.user._id) {
@@ -146,6 +146,33 @@ router.post('/:id/leave', isSignedIn, async (req, res) => {
     } catch (error) {
       console.error(error);
       res.redirect('/games');
+    }
+});
+
+// POST /games/:id/set-winner - Set the winner of a game (creator only)
+router.post('/:id/set-winner', isSignedIn, async (req, res) => {
+    try {
+      const game = await Game.findById(req.params.id);
+      if (!game) return res.status(404).send('Game not found');
+
+      if (game.creator.toString() !== req.session.user._id.toString()) {
+        return res.status(403).send('Only the creator can set the winner.');
+      }
+      if (game.time > new Date()) {
+        return res.status(400).send('Cannot set winner for a future game.');
+      }
+
+      const winnerId = req.body.winnerId; 
+      if (!game.participants.some(p => p.toString() === winnerId)) {
+        return res.status(400).send('Winner must be a participant.');
+      }
+      game.winner = winnerId;
+      game.status = 'Completed'; 
+      await game.save();
+      res.redirect(`/games/${game._id}`);
+    } catch (error) {
+      console.error(error);
+      res.redirect(`/games/${req.params.id}`);
     }
 });
 
