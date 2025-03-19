@@ -11,6 +11,9 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 
 const User = require('./models/user.js');
 const passport = require('./config/passport-config.js');
+const cron = require('node-cron');
+const Game = require('./models/game.js');
+const Tournament = require('./models/tournament.js');
 
 const authController = require('./controllers/auth.js');
 const gamesController = require('./controllers/games.js');
@@ -57,32 +60,38 @@ app.use('/games', gamesController);
 app.use('/tournaments', tournamentController);
 
 
-// app.get('/profile', isSignedIn, async (req, res) => {
-//   try {
-//     const user = await User.findById(req.session.user._id)
-//       .populate('pastGames')
-//       .populate('tournamentJoined');
-//     if (!user) throw new Error('User not found');
-//     res.render('users/profile.ejs', { user });
-//   } catch (error) {
-//     console.log(error);
-//     res.render('index.ejs');
-//   }
-// });
+// Cron job to update completed status (runs daily at midnight)
+cron.schedule('0 0 * * *', async () => {
+  try {
+    const now = new Date();
+    const games = await Game.find({ completed: false });
+    for (const game of games) {
+      if (game.time < now) {
+        game.completed = true;
+        if (game.status !== 'Completed') {
+          game.status = 'Completed';
+        }
+        await game.save();
+      }
+    }
 
+    // Update Tournaments
+    const tournaments = await Tournament.find({ completed: false });
+    for (const tournament of tournaments) {
+      if (tournament.endDate < now) { 
+        tournament.completed = true;
+        if (tournament.status !== 'Completed') {
+          tournament.status = 'Completed';
+        }
+        await tournament.save();
+      }
+    }
 
-// // other's profile
-// app.get('/users/:userId', isSignedIn, async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.userId);
-//     if (!user) return res.status(404).send('User not found');
-//     res.render('users/profile.ejs', { user });
-//   } catch (error) {
-//     console.log(error);
-//     res.redirect('/');
-//   }
-// });
-
+    console.log('Updated completion status for games and tournaments');
+  } catch (error) {
+    console.error('Cron job error:', error);
+  }
+});
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
