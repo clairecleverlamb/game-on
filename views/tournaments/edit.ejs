@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit a Tournament</title>
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+        <h1>Edit Tournament</h1>
+        <form action="/tournaments/<%= tournament._id %>?_method=PUT" method="POST">
+            <label for="name">Tournament Name:</label>
+            <input type="text" id="name" name="name" value="<%= tournament.name %>" required><br>
+
+            <label for="sport">Sport:</label>
+            <input type="text" id="sport" name="sport" value="<%= tournament.sport %>" required><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" value="<%= tournament.location %>" required><br>
+
+            <label for="startDate">Start Date:</label>
+            <input type="datetime-local" id="startDate" name="startDate"
+                value="<%= tournament.startDate.toISOString().slice(0,16) %>" required><br>
+
+            <label for="endDate">End Date:</label>
+            <input type="datetime-local" id="endDate" name="endDate"
+                value="<%= tournament.endDate.toISOString().slice(0,16) %>" required><br>
+
+            <label for="bracketType">Bracket Type:</label>
+            <select id="bracketType" name="bracketType">
+                <option value="Single Elimination" <%=tournament.bracketType==='Single Elimination' ? 'selected' : '' %>
+                    >Single Elimination</option>
+                <option value="Round Robin" <%=tournament.bracketType==='Round Robin' ? 'selected' : '' %>>Round Robin
+                </option>
+                <option value="Group Stage" <%=tournament.bracketType==='Group Stage' ? 'selected' : '' %>>Group Stage
+                </option>
+            </select><br>
+
+            <label for="teamSize">Team Size:</label>
+            <input type="number" id="teamSize" name="teamSize" value="<%= tournament.teamSize %>" min="1" required><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"><%= tournament.description %></textarea><br>
+
+            <button type="submit">Update Tournament</button>
+        </form>
+        <%- include('../partials/footer') %>
+</body>
+
+</html>

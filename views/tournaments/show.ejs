@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Show</title>
+</head>
+<body>
+    <%- include('../partials/header') %>
+   <h1><%= tournament.name %></h1>
+    <p><strong>Sport:</strong> <%= tournament.sport %></p>
+    <p><strong>Location:</strong> <%= tournament.location %></p>
+    <p><strong>Start Date:</strong> <%= tournament.startDate.toLocaleString() %></p>
+    <p><strong>End Date:</strong> <%= tournament.endDate.toLocaleString() %></p>
+    <p><strong>Bracket Type:</strong> <%= tournament.bracketType %></p>
+    <p><strong>Team Size:</strong> <%= tournament.teamSize %></p>
+    <p><strong>Status:</strong> <%= tournament.status %></p>
+    <p><strong>Description:</strong> <%= tournament.description || 'No description provided.' %></p>
+    <p><strong>Creator:</strong> <%= tournament.creator.username %></p>
+    <p><strong>Participants:</strong> <%= tournament.participants.map(p => p.username).join(', ') %></p>
+
+    <% if (user && !tournament.participants.some(p => p._id.toString() === user._id.toString()) && tournament.status === 'Upcoming') { %>
+       <form action="/tournaments/<%= tournament._id %>/join" method="POST">
+       <button type="submit">Join Tournament</button>
+       </form>
+    <% } %>
+
+    <% if (user && tournament.creator._id.toString() === user._id.toString()) { %>
+      <a href="/tournaments/<%= tournament._id %>/edit">Edit</a>
+      <form action="/tournaments/<%= tournament._id %>?_method=DELETE" method="POST">
+         <button type="submit">Delete</button>
+      </form>
+    <% } %>
+    <%- include('../partials/footer') %>
+</body>
+</html>

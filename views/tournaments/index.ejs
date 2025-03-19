@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Index</title>
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+        <h1>All Tournaments</h1>
+        <ul>
+            <% tournaments.forEach(tournament=> { %>
+                <li>
+                    <a href="/tournaments/<%= tournament._id %>">
+                        <%= tournament.name %>
+                    </a>
+                    - <%= tournament.sport %> (<%= tournament.startDate.toLocaleDateString() %>)
+                </li>
+                <% }) %>
+        </ul>
+        <a href="/tournaments/new">Create a New Tournament</a>
+        <%- include('../partials/footer') %>
+</body>
+
+</html>

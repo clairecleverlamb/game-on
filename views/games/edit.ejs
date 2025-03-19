@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit a game</title>
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+        <h1>Edit Game</h1>
+        <form action="/games/<%= game._id %>?_method=PUT" method="POST">
+            <label for="sport">Sport:</label>
+            <input type="text" id="sport" name="sport" value="<%= game.sport %>" required><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" value="<%= game.location %>" required><br>
+
+            <label for="time">Time:</label>
+            <input type="datetime-local" id="time" name="time" value="<%= game.time.toISOString().slice(0,16) %>"
+                required><br>
+
+            <label for="skillLevel">Skill Level:</label>
+            <select id="skillLevel" name="skillLevel">
+                <option value="Beginner" <%=game.skillLevel==='Beginner' ? 'selected' : '' %>>Beginner</option>
+                <option value="Intermediate" <%=game.skillLevel==='Intermediate' ? 'selected' : '' %>>Intermediate
+                </option>
+                <option value="Advanced" <%=game.skillLevel==='Advanced' ? 'selected' : '' %>>Advanced</option>
+            </select><br>
+
+            <label for="maxPlayers">Max Players:</label>
+            <input type="number" id="maxPlayers" name="maxPlayers" value="<%= game.maxPlayers %>" min="2" required><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"><%= game.description %></textarea><br>
+
+            <button type="submit">Update Game</button>
+        </form>
+        <%- include('../partials/footer') %>
+</body>
+
+</html>
