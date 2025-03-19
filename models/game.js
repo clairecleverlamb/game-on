@@ -32,11 +32,20 @@ const gameSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Open', 'Full', 'Cancelled'],
+    enum: ['Open', 'Full', 'Completed'],
     default: 'Open', 
   },
   description: {
     type: String, 
+  },
+  winner: { 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', 
+    default: null 
+  },
+  completed: {
+    type: Boolean,
+    default: false,
   },
 }, {
   timestamps: true,
