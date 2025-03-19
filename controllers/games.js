@@ -47,7 +47,8 @@ router.get('/:id', async (req, res) => {
       const game = await Game.findById(req.params.id)
         .populate('creator')
         .populate('participants');
-      res.render('games/show.ejs', { game });
+     if (!game) return res.status(404).send('Game not found');
+     res.render('games/show.ejs', { game });
     } catch (error) {
       console.error(error);
       res.redirect('/games');
@@ -59,7 +60,7 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/edit', isSignedIn, async (req, res) => {
     try {
       const game = await Game.findById(req.params.id);
-      if (game.creator.toString() !== req.user._id.toString()) {
+      if (game.creator.toString() !== req.session.user._id.toString()) {
         return res.status(403).send('You are not authorized to edit this game.');
       }
       res.render('games/edit.ejs', { game });
@@ -74,7 +75,7 @@ router.get('/:id/edit', isSignedIn, async (req, res) => {
 router.put('/:id', isSignedIn, async (req, res) => {
     try {
       const game = await Game.findById(req.params.id);
-      if (game.creator.toString() !== req.user._id.toString()) {
+      if (game.creator.toString() !== req.session.user._id.toString()) {
         return res.status(403).send('You are not authorized to edit this game.');
       }
       await Game.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -89,7 +90,7 @@ router.put('/:id', isSignedIn, async (req, res) => {
 router.delete('/:id', isSignedIn, async (req, res) => {
     try {
       const game = await Game.findById(req.params.id);
-      if (game.creator.toString() !== req.user._id.toString()) {
+      if (game.creator.toString() !== req.session.user._id.toString()) {
         return res.status(403).send('You are not authorized to delete this game.');
       }
       await Game.findByIdAndDelete(req.params.id);
