@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const session = require('express-session');
 const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
+
 const User = require('./models/user.js');
 const passport = require('./config/passport-config.js');
 
@@ -25,6 +26,7 @@ mongoose.connection.on('connected', () => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
+app.use(express.static('public'));
 // app.use(morgan('dev'));
 
 app.use(
@@ -43,7 +45,7 @@ app.use(passUserToView);
 // regular sign in with username + password
 app.get('/', (req, res) => {
   if (req.session.user) {
-    res.redirect('/profile');
+    res.redirect('/users');
   } else {
     // homepage for users who are not signed in
     res.render('index.ejs');
@@ -52,6 +54,9 @@ app.get('/', (req, res) => {
 
 
 app.use('/auth', authController);
+app.use('/users', userController);
+app.use('/games', gamesController);
+app.use('/tournaments', tournamentController);
 
 // currentUser's profile
 app.get('/profile', isSignedIn, async (req, res) => {
@@ -80,10 +85,6 @@ app.get('/users/:userId', isSignedIn, async (req, res) => {
   }
 });
 
-
-app.use('/users', userController);
-app.use('/games', gamesController);
-app.use('/tournaments', tournamentController);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
