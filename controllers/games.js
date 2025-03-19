@@ -128,4 +128,26 @@ router.post('/:id/join', isSignedIn, async (req, res) => {
     }
 });
 
+router.post('/:id/leave', isSignedIn, async (req, res) => {
+    try {
+      const game = await Game.findById(req.params.id);
+      const user = await User.findById(req.session.user._id);
+      if (!game) return res.status(404).send('Game not found');
+      if (game.participants.some(p => p.toString() === req.session.user._id.toString())) {
+        game.participants = game.participants.filter(p => p.toString() !== req.session.user._id.toString());
+        user.pastGames = user.pastGames.filter(g => g.toString() !== req.params.id.toString());
+        if (game.status === 'Full' && game.participants.length < game.maxPlayers) {
+          game.status = 'Open'; 
+        }
+        await game.save();
+        await user.save();
+      }
+      res.redirect(`/games/${req.params.id}`);
+    } catch (error) {
+      console.error(error);
+      res.redirect('/games');
+    }
+});
+
+
 module.exports = router;

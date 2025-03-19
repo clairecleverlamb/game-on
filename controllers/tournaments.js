@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     }
   });
 
-// GET /tournaments/new - Show form to create a new tournament
+// GET /tournaments/new - show form to create a new tournament
 router.get('/new', isSignedIn, (req, res) => {
     res.render('tournaments/new.ejs');
   });
@@ -24,18 +24,29 @@ router.get('/new', isSignedIn, (req, res) => {
 // POST /tournaments - Create a new tournament
 router.post('/', isSignedIn, async (req, res) => {
     try {
-      const tournamentData = {
-        ...req.body,
-        creator: req.user._id,
-        participants: [req.user._id], // Creator auto-joins
-      };
-      const tournament = new Tournament(tournamentData);
-      await tournament.save();
-      res.redirect('/tournaments');
-    } catch (error) {
-      console.error(error);
-      res.redirect('/tournaments/new');
-    }
+        if (!req.session.user || !req.session.user._id) {
+          throw new Error('User not authenticated');
+        }
+        const tournamentData = {
+          name: req.body.name, 
+          sport: req.body.sport,
+          location: req.body.location,
+          startDate: new Date(req.body.startDate),
+          endDate: new Date(req.body.endDate),
+          bracketType: req.body.bracketType,
+          teamSize: parseInt(req.body.teamSize, 10),
+          creator: req.session.user._id,
+          participants: [req.session.user._id],
+          status: 'Upcoming', 
+          description: req.body.description || ''
+        };
+        const tournament = new Tournament(tournamentData);
+        await tournament.save();
+        res.redirect(`/tournaments/${tournament._id}`); // Redirect to show page
+      } catch (error) {
+        console.error(error);
+        res.render('tournaments/new.ejs', { error: 'Failed to create tournament. Please try again.' });
+      }
   });
 
 
@@ -45,6 +56,7 @@ router.get('/:id', async (req, res) => {
       const tournament = await Tournament.findById(req.params.id)
         .populate('creator')
         .populate('participants');
+      if (!tournament) return res.status(404).send('Tournament not found');
       res.render('tournaments/show.ejs', { tournament });
     } catch (error) {
       console.error(error);
@@ -56,7 +68,7 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/edit', isSignedIn, async (req, res) => {
     try {
       const tournament = await Tournament.findById(req.params.id);
-      if (tournament.creator.toString() !== req.user._id.toString()) {
+      if (tournament.creator.toString() !== req.session.user._id.toString()) {
         return res.status(403).send('You are not authorized to edit this tournament.');
       }
       res.render('tournaments/edit.ejs', { tournament });
@@ -70,7 +82,7 @@ router.get('/:id/edit', isSignedIn, async (req, res) => {
 router.put('/:id', isSignedIn, async (req, res) => {
     try {
       const tournament = await Tournament.findById(req.params.id);
-      if (tournament.creator.toString() !== req.user._id.toString()) {
+      if (tournament.creator.toString() !== req.session.user._id.toString()) {
         return res.status(403).send('You are not authorized to edit this tournament.');
       }
       await Tournament.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -85,7 +97,7 @@ router.put('/:id', isSignedIn, async (req, res) => {
 router.delete('/:id', isSignedIn, async (req, res) => {
     try {
       const tournament = await Tournament.findById(req.params.id);
-      if (tournament.creator.toString() !== req.user._id.toString()) {
+      if (tournament.creator.toString() !== req.session.user._id.toString()) {
         return res.status(403).send('You are not authorized to delete this tournament.');
       }
       await Tournament.findByIdAndDelete(req.params.id);
@@ -100,9 +112,9 @@ router.delete('/:id', isSignedIn, async (req, res) => {
 router.post('/:id/join', isSignedIn, async (req, res) => {
     try {
       const tournament = await Tournament.findById(req.params.id);
-      const user = await User.findById(req.user._id);
-      if (!tournament.participants.includes(req.user._id)) {
-        tournament.participants.push(req.user._id);
+      const user = await User.findById(req.session.user._id);
+      if (!tournament.participants.some(p => p.toString() === req.session.user._id.toString())) {
+        tournament.participants.push(req.session.user._id);
         user.tournamentJoined.push(tournament._id);
         await tournament.save();
         await user.save();
@@ -112,8 +124,25 @@ router.post('/:id/join', isSignedIn, async (req, res) => {
       console.error(error);
       res.redirect('/tournaments');
     }
-  });
+});
 
+router.post('/:id/leave', isSignedIn, async (req, res) => {
+    try {
+      const tournament = await Tournament.findById(req.params.id);
+      const user = await User.findById(req.session.user._id);
+      if (!tournament) return res.status(404).send('Tournament not found');
+      if (tournament.participants.some(p => p.toString() === req.session.user._id.toString())) {
+        tournament.participants = tournament.participants.filter(p => p.toString() !== req.session.user._id.toString());
+        user.tournamentJoined = user.tournamentJoined.filter(t => t.toString() !== req.params.id.toString());
+        await tournament.save();
+        await user.save();
+      }
+      res.redirect(`/tournaments/${req.params.id}`);
+    } catch (error) {
+      console.error(error);
+      res.redirect('/tournaments');
+    }
+});
 
 
 module.exports = router;
