@@ -7,5 +7,74 @@
 </head>
 <body>
     <h1>Profile page</h1>
+    <!-- TODO include headers  -->
+
+<div class="profile-container">
+  <div class="user-info">
+    <% if (user.profilePicture) { %>
+      <img src="<%= user.profilePicture %>" alt="Profile Picture" width="100">
+    <% } %>
+    <h1><%= user.username %></h1>
+    <% if (user.fullName) { %>
+      <p><strong>Full Name:</strong> <%= user.fullName %></p>
+    <% } %>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <% if (user.location) { %>
+      <p><strong>Location:</strong> <%= user.location %></p>
+    <% } %>
+    <% if (user.sportsInterests) { %>
+      <p><strong>Sports Interest:</strong> <%= user.sportsInterests %></p>
+    <% } %>
+    <p><strong>Games Played:</strong> <%= user.stats.gamePlayed %></p>
+    <p><strong>Wins:</strong> <%= user.stats.wins %></p>
+
+    <h3>Past Games</h3>
+    <ul>
+      <% user.pastGames.forEach(game => { %>
+        <li><a href="/games/<%= game._id %>"><%= game.sport %></a></li>
+      <% }) %>
+    </ul>
+
+    <h3>Tournaments Joined</h3>
+    <ul>
+      <% user.tournamentJoined.forEach(tournament => { %>
+        <li><a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a></li>
+      <% }) %>
+    </ul>
+
+    <% if (user.highlightVideos && user.highlightVideos.length > 0) { %>
+      <h3>Highlight Videos</h3>
+      <% user.highlightVideos.forEach(video => { %>
+        <video src="<%= video %>" controls width="200"></video>
+      <% }) %>
+    <% } %>
+
+    <a href="/profile/edit">Edit Profile</a>
+  </div>
+
+  <!-- Right Side: Events -->
+    <div class="events">
+      <div class="create-buttons">
+        <a href="/games/new">Create Game</a>
+        <a href="/tournaments/new">Create Tournament</a>
+    </div>
+
+    <div class="games-list">
+      <h2>Games</h2>
+      <% games.forEach(game => { %>
+        <%- include('partials/game-item', { game }) %>
+      <% }) %>
+    </div>
+
+    <div class="tournaments-list">
+      <h2>Tournaments</h2>
+      <% tournaments.forEach(tournament => { %>
+        <%- include('partials/tournament-item', { tournament }) %>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
 </body>
 </html>
