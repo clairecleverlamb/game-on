@@ -29,7 +29,7 @@ const userSchema = mongoose.Schema({
   }, 
   sportsInterests: {
     type: String,
-    enum: ['Beginner', 'Intermediate', 'Advance'],
+    enum: ['Beginner', 'Intermediate', 'Advanced'],
   }, 
   stats: {
     gamePlayed: {
