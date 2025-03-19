@@ -16,24 +16,28 @@ router.get('/', async (req, res) => {
   });
 
 // GET /games/new - Show form to create a new game
-router.get('/new', isSignedIn, (req, res) => {
-    res.render('games/new.ejs');
-  });
-
-// POST /games - Create a new game
 router.post('/', isSignedIn, async (req, res) => {
     try {
+      if (!req.session.user || !req.session.user._id) {
+        throw new Error('User not authenticated');
+      }
       const gameData = {
-        ...req.body,
-        creator: req.user._id,
-        participants: [req.user._id], // Creator auto-joins
+        sport: req.body.sport,
+        location: req.body.location,
+        time: new Date(req.body.time), 
+        skillLevel: req.body.skillLevel,
+        maxPlayers: parseInt(req.body.maxPlayers, 10),
+        status: 'Open',
+        description: req.body.description || '',
+        creator: req.session.user._id, 
+        participants: [req.session.user._id] // Creator auto-joins
       };
       const game = new Game(gameData);
       await game.save();
-      res.redirect('/games');
+      res.redirect(`/games/${game._id}`); // Redirect to show.ejs
     } catch (error) {
       console.error(error);
-      res.redirect('/games/new');
+      res.render('games/new.ejs', { error: 'Failed to create game. Please try again.' });
     }
   });
 
@@ -100,9 +104,10 @@ router.delete('/:id', isSignedIn, async (req, res) => {
 router.post('/:id/join', isSignedIn, async (req, res) => {
     try {
       const game = await Game.findById(req.params.id);
-      const user = await User.findById(req.user._id);
-      if (game.participants.length < game.maxPlayers && !game.participants.includes(req.user._id)) {
-        game.participants.push(req.user._id);
+      const user = await User.findById(req.session.user._id);
+      if (game.participants.length < game.maxPlayers && 
+          !game.participants.some(p => p.toString() === req.session.user._id.toString())) {
+        game.participants.push(req.session.user._id);
         user.pastGames.push(game._id);
         if (game.participants.length === game.maxPlayers) {
           game.status = 'Full';
@@ -115,7 +120,6 @@ router.post('/:id/join', isSignedIn, async (req, res) => {
       console.error(error);
       res.redirect('/games');
     }
-  });
-
+});
 
 module.exports = router;
