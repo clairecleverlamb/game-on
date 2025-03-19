@@ -47,43 +47,41 @@ app.get('/', (req, res) => {
   if (req.session.user) {
     res.redirect('/users');
   } else {
-    // homepage for users who are not signed in
     res.render('index.ejs');
   }
 });
-
 
 app.use('/auth', authController);
 app.use('/users', userController);
 app.use('/games', gamesController);
 app.use('/tournaments', tournamentController);
 
-// currentUser's profile
-app.get('/profile', isSignedIn, async (req, res) => {
-  try {
-    const user = await User.findById(req.session.user._id)
-      .populate('pastGames')
-      .populate('tournamentJoined');
-    if (!user) throw new Error('User not found');
-    res.render('users/profile.ejs', { user });
-  } catch (error) {
-    console.log(error);
-    res.render('index.ejs');
-  }
-});
+
+// app.get('/profile', isSignedIn, async (req, res) => {
+//   try {
+//     const user = await User.findById(req.session.user._id)
+//       .populate('pastGames')
+//       .populate('tournamentJoined');
+//     if (!user) throw new Error('User not found');
+//     res.render('users/profile.ejs', { user });
+//   } catch (error) {
+//     console.log(error);
+//     res.render('index.ejs');
+//   }
+// });
 
 
-// other's profile
-app.get('/users/:userId', isSignedIn, async (req, res) => {
-  try {
-    const user = await User.findById(req.params.userId);
-    if (!user) return res.status(404).send('User not found');
-    res.render('users/profile.ejs', { user });
-  } catch (error) {
-    console.log(error);
-    res.redirect('/');
-  }
-});
+// // other's profile
+// app.get('/users/:userId', isSignedIn, async (req, res) => {
+//   try {
+//     const user = await User.findById(req.params.userId);
+//     if (!user) return res.status(404).send('User not found');
+//     res.render('users/profile.ejs', { user });
+//   } catch (error) {
+//     console.log(error);
+//     res.redirect('/');
+//   }
+// });
 
 
 app.listen(port, () => {
