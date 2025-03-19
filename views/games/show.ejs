@@ -10,6 +10,13 @@
 <body>
     <%- include('../partials/header') %>
     <h1><%= game.sport %></h1>
+
+    <% if (game.completed) { %>
+        <p style="color: red;">This game has ended.</p>
+    <% } else if (game.participants.length >= game.maxPlayers) { %>
+        <p style="color: orange;">This game is full.</p>
+    <% } %>
+
     <p>
         <strong>Location:</strong><%= game.location %>
     </p>
@@ -34,6 +41,9 @@
     <p><strong>Participants:</strong>
         <%= game.participants.map(p=> p.username).join(', ') %>
     </p>
+    <% if (game.winner) { %>
+        <p><strong>Winner:</strong> <%= game.winner.username %></p>
+      <% } %>
 
     <% if (user && !game.participants.some(p=> p._id.toString() === user._id.toString()) && game.participants.length
     < game.maxPlayers && game.status==='Open' ) { %>
@@ -53,6 +63,17 @@
         <form action="/games/<%= game._id %>?_method=DELETE" method="POST">
             <button type="submit">Delete</button>
         </form>
+        <% if (!game.winner && game.time < new Date()) { %>
+          <form action="/games/<%= game._id %>/set-winner" method="POST">
+            <label for="winnerId">Select Winner:</label>
+            <select name="winnerId" required>
+              <% game.participants.forEach(participant => { %>
+                <option value="<%= participant._id %>"><%= participant.username %></option>
+              <% }) %>
+            </select>
+            <button type="submit">Set Winner</button>
+          </form>
+        <% } %>
     <% } %>
     <%- include('../partials/footer') %>
 </body>
