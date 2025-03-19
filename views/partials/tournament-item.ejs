@@ -1,0 +1,5 @@
+
+<div class="tournament-item">
+    <h3><a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a></h3>
+    <p>Date: <%= tournament.date ? new Date(tournament.date).toLocaleDateString() : 'TBD' %></p>
+</div>

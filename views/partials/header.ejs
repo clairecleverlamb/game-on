@@ -1,4 +1,4 @@
-<!-- views/partials/header.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,12 +14,13 @@
     </div>
     <div class="nav-links">
       <% if (user) { %>
-        <a href="/users/profile">Profile</a>
-        <a href="/auth/logout">Logout</a>
+        <a href="/users">Profile</a>
+        <a href="/auth/sign-out">Sign Out</a> <!-- Changed from /auth/logout -->
       <% } else { %>
         <a href="/auth/sign-up">Sign Up</a>
-        <a href="/auth/sign-in">Login</a>
+        <a href="/auth/sign-in">Sign In</a> <!-- Changed from Login -->
         <a href="/">Browse</a>
       <% } %>
     </div>
   </nav>
+  </body>

@@ -1,0 +1,22 @@
+
+<aside>
+    <div class="sidebar-content">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <% if (user) { %>
+          <li><a href="/users/profile">My Profile</a></li>
+          <li><a href="/games/new">Create Game</a></li>
+          <li><a href="/tournaments/new">Create Tournament</a></li>
+        <% } else { %>
+          <li><a href="/auth/sign-up">Sign Up</a></li>
+          <li><a href="/auth/sign-in">Login</a></li>
+        <% } %>
+      </ul>
+      <% if (user) { %>
+        <h3>Your Stats</h3>
+        <p>Games Played: <%= user.stats.gamePlayed %></p>
+        <p>Wins: <%= user.stats.wins %></p>
+      <% } %>
+    </div>
+</aside>

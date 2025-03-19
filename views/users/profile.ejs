@@ -6,8 +6,9 @@
     <title>Your profile</title>
 </head>
 <body>
-    <h1>Profile page</h1>
-    <!-- TODO include headers  -->
+<%- include('../partials/header') %>
+<%- include('../partials/subheader', { pageTitle: 'Your Profile', backLink: '/' }) %>
+<%- include('../partials/sidebar') %>
 
 <div class="profile-container">
   <div class="user-info">
@@ -43,6 +44,7 @@
     </ul>
 
     <% if (user.highlightVideos && user.highlightVideos.length > 0) { %>
+        
       <h3>Highlight Videos</h3>
       <% user.highlightVideos.forEach(video => { %>
         <video src="<%= video %>" controls width="200"></video>
@@ -52,29 +54,36 @@
     <a href="/profile/edit">Edit Profile</a>
   </div>
 
-  <!-- Right Side: Events -->
-    <div class="events">
-      <div class="create-buttons">
-        <a href="/games/new">Create Game</a>
-        <a href="/tournaments/new">Create Tournament</a>
+  <div class="events">
+    <div class="create-buttons">
+      <a href="/games/new">Create Game</a>
+      <a href="/tournaments/new">Create Tournament</a>
     </div>
 
     <div class="games-list">
-      <h2>Games</h2>
-      <% games.forEach(game => { %>
-        <%- include('partials/game-item', { game }) %>
-      <% }) %>
+      <h2>Upcoming Games</h2>
+      <% if (games && games.length > 0) { %>
+        <% games.forEach(game => { %>
+          <%- include('partials/game-item', { game }) %>
+        <% }) %>
+      <% } else { %>
+        <p>No upcoming games yet.</p>
+      <% } %>
     </div>
 
     <div class="tournaments-list">
-      <h2>Tournaments</h2>
-      <% tournaments.forEach(tournament => { %>
-        <%- include('partials/tournament-item', { tournament }) %>
-      <% }) %>
+      <h2>Upcoming Tournaments</h2>
+      <% if (tournaments && tournaments.length > 0) { %>
+        <% tournaments.forEach(tournament => { %>
+          <%- include('partials/tournament-item', { tournament }) %>
+        <% }) %>
+      <% } else { %>
+        <p>No upcoming tournaments yet.</p>
+      <% } %>
     </div>
   </div>
 </div>
 
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>
 </body>
 </html>
