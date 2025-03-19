@@ -6,27 +6,27 @@
     <title>edit profile</title>
 </head>
 <body>
+    <%- include('../partials/header') %>
     <h1>Edit Your Profile</h1>
-<form action="/users/profile/edit" method="POST">
-  <label for="fullName">Full Name:</label>
-  <input type="text" name="fullName" value="<%= user.fullName || '' %>" required><br>
+    <form action="/users/edit?_method=PUT" method="POST">
+      <label for="fullName">Full Name:</label>
+      <input type="text" name="fullName" value="<%= user.fullName || '' %>" required><br>
 
-  <label for="location">Location:</label>
-  <input type="text" name="location" value="<%= user.location || '' %>"><br>
+      <label for="location">Location:</label>
+      <input type="text" name="location" value="<%= user.location || '' %>"><br>
 
-  <label for="sportsInterests">Sports Interests:</label>
-  <select name="sportsInterests">
-    <option value="Beginner" <%= user.sportsInterests === 'Beginner' ? 'selected' : '' %>>Beginner</option>
-    <option value="Intermediate" <%= user.sportsInterests === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
-    <option value="Advanced" <%= user.sportsInterests === 'Advanced' ? 'selected' : '' %>>Advanced</option>
-  </select><br>
+      <label for="sportsInterests">Sports Interests:</label>
+      <select name="sportsInterests">
+        <option value="Beginner" <%= user.sportsInterests === 'Beginner' ? 'selected' : '' %>>Beginner</option>
+        <option value="Intermediate" <%= user.sportsInterests === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
+        <option value="Advanced" <%= user.sportsInterests === 'Advanced' ? 'selected' : '' %>>Advanced</option>
+      </select><br>
 
-  <label for="profilePicture">Profile Picture URL:</label>
-  <input type="text" name="profilePicture" value="<%= user.profilePicture || '' %>"><br>
+      <label for="profilePicture">Profile Picture URL:</label>
+       <input type="text" name="profilePicture" value="<%= user.profilePicture || '' %>"><br>  
 
-  <!-- Add more fields based on your User schema -->
-
-  <button type="submit">Save Changes</button>
-</form>
+       <button type="submit">Save Changes</button>
+    </form>
+    <%- include('../partials/footer') %>
 </body>
 </html>

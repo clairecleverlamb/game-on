@@ -13,11 +13,11 @@
 <div class="profile-container">
   <div class="user-info">
     <% if (user.profilePicture) { %>
-      <img src="<%= user.profilePicture %>" alt="Profile Picture" width="100">
+      <img src="<%= `${user.profilePicture}` %>" alt="Profile Picture" width="100">
     <% } %>
     <h1><%= user.username %></h1>
     <% if (user.fullName) { %>
-      <p><strong>Full Name:</strong> <%= user.fullName %></p>
+      <p><strong><%= user.fullName %></strong></p>
     <% } %>
     <p><strong>Email:</strong> <%= user.email %></p>
     <% if (user.location) { %>
@@ -44,14 +44,14 @@
     </ul>
 
     <% if (user.highlightVideos && user.highlightVideos.length > 0) { %>
-        
+
       <h3>Highlight Videos</h3>
       <% user.highlightVideos.forEach(video => { %>
         <video src="<%= video %>" controls width="200"></video>
       <% }) %>
     <% } %>
 
-    <a href="/profile/edit">Edit Profile</a>
+    <a href="/users/edit">Edit Profile</a>
   </div>
 
   <div class="events">
@@ -64,7 +64,7 @@
       <h2>Upcoming Games</h2>
       <% if (games && games.length > 0) { %>
         <% games.forEach(game => { %>
-          <%- include('partials/game-item', { game }) %>
+          <%- include('../partials/game-item', { game }) %>
         <% }) %>
       <% } else { %>
         <p>No upcoming games yet.</p>
@@ -75,7 +75,7 @@
       <h2>Upcoming Tournaments</h2>
       <% if (tournaments && tournaments.length > 0) { %>
         <% tournaments.forEach(tournament => { %>
-          <%- include('partials/tournament-item', { tournament }) %>
+          <%- include('../partials/tournament-item', { tournament }) %>
         <% }) %>
       <% } else { %>
         <p>No upcoming tournaments yet.</p>
