@@ -61,36 +61,65 @@ GET /gameon/games/nearby?lat=37.7749&lng=-122.4194
 ```
 
 ## Directory Structure:
+
+# Game-On Sports Connect
+
+## Project Structure
+
 ```
-gameon/
+game-on-sports-connect/
+│
+│── config/
+│   ├── passport-config.js    # Configuration for authentication
+│
 │── controllers/
-│   ├── auth.js               # User authentication (signup, login)
-│   ├── games.js              # Manages sports games CRUD
-│   ├── tournaments.js        # Manages tournaments CRUD
-│   ├── users.js              # Handles user profiles CRUD
+│   ├── auth.js              # Handles authentication (signup, login)
+│   ├── users.js             # Handles user operations (CRUD profile)
+│   ├── games.js             # Handles game operations (CRUD for users)
+│   ├── tournaments.js       # Handles tournament-related functions (creation, management, and deletion of tournaments)
 │
 │── middleware/
-│   ├── is-signed-in.js       # Middleware to check if user’s signed in
-│   ├── pass-user-to-view.js  # Passes user data to views
+│   ├── is-signed-in.js      # Middleware to check if a user is signed in
+│   ├── pass-user-to-view.js # Passes user data to views
 │
 │── models/
-│   ├── Game.js               # Mongoose schema for games
-│   ├── Tournament.js         # Mongoose schema for tournaments
-│   ├── User.js               # Mongoose schema for users
+│   ├── game.js              # Mongoose schema for games
+│   ├── user.js              # Mongoose schema for users
+│   ├── tournament.js        # Mongoose schema for tournaments
 │
 │── views/
-│   ├── index.ejs             # Homepage
-│   ├── games/                # Views for game listings & details
-│   ├── tournaments/          # Views for tournament pages
-│   ├── users/                # Views for athlete profiles
+│   ├── index.ejs            # Homepage
+│   ├── auth/
+│   │   ├── sign-in.ejs      # Login page
+│   │   ├── sign-up.ejs      # Registration page
+│   ├── partials/
+│   │   ├── header.ejs       # Header partial
+│   │   ├── footer.ejs       # Footer partial
+│   │   ├── sidebar.ejs      # Sidebar partial
+│   │   ├── subheader.ejs    # Subheader partial
+│   │   ├── game-item.ejs    # Game item partial
+│   │   ├── tournament-item.ejs # Tournament item partial
+│   ├── users/
+│   │   ├── profile.ejs      # User profile page (view personal info, skill level, and events)
+│   │   ├── profile-edit.ejs # Page for editing and deleting profile
+│   ├── games/
+│   │   ├── edit.ejs         # Edit game page
+│   │   ├── index.ejs        # List all games
+│   │   ├── new.ejs          # Create new game
+│   │   ├── show.ejs         # Show individual game details
+│   ├── tournaments/
+│   │   ├── edit.ejs         # Edit tournament page
+│   │   ├── index.ejs        # List all tournaments
+│   │   ├── new.ejs          # Create new tournament
+│   │   ├── show.ejs         # Show individual tournament details
 │
 │── public/
-│   ├── css/                  # Stylesheets
-│   ├── js/                   # Client-side scripts
-│   ├── assets/               # pics
+│   ├── css/                 # Stylesheets
+│   ├── js/                  # Client-side scripts
 │
-│── server.js                 # Main server file
-│── .env                      # Environment variables
-│── package.json              # Dependencies and scripts
+│── server.js                # Main server file
+│── .env                     # Environment variables
+│── package.json             # Dependencies and scripts
 ```
+
 
