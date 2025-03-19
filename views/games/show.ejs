@@ -42,6 +42,12 @@
         </form>
     <% } %>
 
+    <% if (user && game.participants.some(p => p._id.toString() === user._id.toString()) && game.creator._id.toString() !== user._id.toString()) { %>
+        <form action="/games/<%= game._id %>/leave" method="POST">
+          <button type="submit">Leave Game</button>
+        </form>
+    <% } %>
+
     <% if (user && game.creator._id.toString()===user._id.toString()) { %>
         <a href="/games/<%= game._id %>/edit">Edit</a>
         <form action="/games/<%= game._id %>?_method=DELETE" method="POST">

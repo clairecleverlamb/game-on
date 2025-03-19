@@ -29,7 +29,7 @@
     <p><strong>Games Played:</strong> <%= user.stats.gamePlayed %></p>
     <p><strong>Wins:</strong> <%= user.stats.wins %></p>
 
-    <h3>Past Games</h3>
+    <h3>Games Joined</h3>
     <ul>
       <% user.pastGames.forEach(game => { %>
         <li><a href="/games/<%= game._id %>"><%= game.sport %></a></li>

@@ -21,8 +21,14 @@
 
     <% if (user && !tournament.participants.some(p => p._id.toString() === user._id.toString()) && tournament.status === 'Upcoming') { %>
        <form action="/tournaments/<%= tournament._id %>/join" method="POST">
-       <button type="submit">Join Tournament</button>
+          <button type="submit">Join Tournament</button>
        </form>
+    <% } %>
+
+    <% if (user && tournament.participants.some(p => p._id.toString() === user._id.toString()) && tournament.creator._id.toString() !== user._id.toString()) { %>
+        <form action="/tournaments/<%= tournament._id %>/leave" method="POST">
+          <button type="submit">Leave Tournament</button>
+        </form>
     <% } %>
 
     <% if (user && tournament.creator._id.toString() === user._id.toString()) { %>
