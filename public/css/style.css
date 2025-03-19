@@ -1,0 +1,158 @@
+/* public/css/style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.subheader {
+    background-color: #e9ecef;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+aside {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sidebar-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-content a {
+    text-decoration: none;
+    color: #333;
+}
+
+.sidebar-content a:hover {
+    color: #007bff;
+}
+
+.profile-container, .community-container, .game-container {
+    margin-left: 220px; /* Space for sidebar */
+    padding: 20px;
+    flex: 1;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+.footer-links a, .personal-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-links a:hover, .personal-links a:hover {
+    text-decoration: underline;
+}
+
+/* Community-specific */
+.user-list {
+    list-style: none;
+    padding: 0;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-item img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info h3 {
+    margin: 0;
+}
+
+.user-info p {
+    margin: 5px 0;
+}
+
+
+.index-container {
+    margin-left: 220px;
+    padding: 20px;
+    flex: 1;
+}
+
+.event-list {
+    list-style: none;
+    padding: 0;
+}
+
+.event-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.event-item a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.event-item a:hover {
+    text-decoration: underline;
+}
+
+.event-item p {
+    margin: 5px 0;
+}
+
+.status {
+    padding: 2px 8px;
+    border-radius: 3px;
+    color: white;
+    font-size: 0.9em;
+}
+
+.status.ended {
+    background-color: #dc3545; /* Red */
+}
+
+.status.full {
+    background-color: #ff9800; /* Orange */
+}
