@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tournament Index</title>
+    <title>All Tournaments - Game On Sports Connect</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
     <%- include('../partials/header') %>
+    <%- include('../partials/subheader', { pageTitle: 'All Tournaments', backLink: '/' }) %>
+    <%- include('../partials/sidebar') %>
+    <div class="index-container">
         <h1>All Tournaments</h1>
-        <ul>
-            <% tournaments.forEach(tournament=> { %>
-                <li>
-                    <a href="/tournaments/<%= tournament._id %>">
-                        <%= tournament.name %>
-                    </a>
-                    - <%= tournament.sport %> (<%= tournament.startDate.toLocaleDateString() %>)
-                </li>
+        <% if (tournaments && tournaments.length > 0) { %>
+            <ul class="event-list">
+                <% tournaments.forEach(tournament => { %>
+                    <li class="event-item">
+                        <a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a>
+                        <p><strong>Sport:</strong> <%= tournament.sport %></p>
+                        <p><strong>Location:</strong> <%= tournament.location %></p>
+                        <p><strong>Start:</strong> <%= tournament.startDate.toLocaleString() %></p>
+                        <% if (tournament.completed) { %>
+                            <span class="status ended">Ended</span>
+                        <% } else if (tournament.participants.length >= tournament.teamSize) { %>
+                            <span class="status full">Full</span>
+                        <% } %>
+                    </li>
                 <% }) %>
-        </ul>
-        <a href="/tournaments/new">Create a New Tournament</a>
-        <%- include('../partials/footer') %>
+            </ul>
+        <% } else { %>
+            <p>No tournaments available.</p>
+        <% } %>
+    </div>
+    <%- include('../partials/footer') %>
 </body>
-
 </html>

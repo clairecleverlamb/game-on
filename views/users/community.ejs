@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Community - Game On Sports Connect</title>
 </head>
 <body>
@@ -24,6 +25,7 @@
                         <div class="user-info">
                             <h3><a href="/users/<%= user._id %>"><%= user.username %></a></h3>
                             <p><strong>Full Name:</strong> <%= user.fullName || 'Not set' %></p>
+                            <p><strong>Location:</strong> <%= user.location || 'Not set' %></p>
                         </div>
                     </li>
                 <% }) %>
