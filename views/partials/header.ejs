@@ -1,0 +1,25 @@
+<!-- views/partials/header.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game On Sports Connect</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <a href="/">Game On Sports Connect</a>
+    </div>
+    <div class="nav-links">
+      <% if (user) { %>
+        <a href="/users/profile">Profile</a>
+        <a href="/auth/logout">Logout</a>
+      <% } else { %>
+        <a href="/auth/sign-up">Sign Up</a>
+        <a href="/auth/sign-in">Login</a>
+        <a href="/">Browse</a>
+      <% } %>
+    </div>
+  </nav>
