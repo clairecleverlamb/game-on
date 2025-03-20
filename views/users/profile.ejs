@@ -11,6 +11,8 @@
 <%- include('../partials/subheader', { pageTitle: 'Your Profile', backLink: '/' }) %>
 <%- include('../partials/sidebar') %>
 
+<%- include('../partials/weather', { location: user.location }) %>
+
 <div class="profile-container">
   <div class="user-info">
 
@@ -94,7 +96,7 @@
     </div>
   </div>
 </div>
-
+<%- include('../partials/calendar') %>
 <%- include('../partials/footer') %>
 </body>
 </html>

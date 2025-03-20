@@ -15,6 +15,8 @@
     <div class="game-container">
     <h1><%= game.sport %></h1>
 
+    <%- include('../partials/weather', { location: game.location }) %>
+
     <% if (game.completed) { %>
         <p style="color: red;">This game has ended.</p>
     <% } else if (game.participants.length >= game.maxPlayers) { %>

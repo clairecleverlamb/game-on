@@ -1,0 +1,38 @@
+<!-- views/partials/calendar.ejs -->
+<div id="calendar"></div>
+<script src="/js/fullcalendar/core.min.js"></script>
+<script src="/js/fullcalendar/daygrid.min.js"></script>
+<link rel="stylesheet" href="/css/fullcalendar.min.css">
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/users/calendar-events')
+            .then(response => {
+                if (!response.ok) throw new Error('Fetch failed: ' + response.status);
+                return response.json();
+            })
+            .then(events => {
+                console.log('Events received:', events);
+                var calendarEl = document.getElementById('calendar');
+                if (!calendarEl) {
+                    console.error('Calendar element not found');
+                    return;
+                }
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    events: events,
+                    eventClick: function(info) {
+                        window.location.href = info.event.url;
+                    }
+                });
+                calendar.render();
+            })
+            .catch(error => console.error('Error loading calendar:', error));
+    });
+</script>
+<style>
+    #calendar {
+        max-width: 300px;
+        margin: 20px;
+        position: relative;
+    }
+</style>
