@@ -11,27 +11,31 @@
     <%- include('../partials/subheader', { pageTitle: 'All Tournaments', backLink: '/' }) %>
     <%- include('../partials/sidebar') %>
     <div class="index-container">
-        <h1>All Tournaments</h1>
+        <h1>Discover All Tournaments</h1>
+        <p class="index-intro">Join epic tournaments and compete with the best!</p>
         <% if (tournaments && tournaments.length > 0) { %>
-            <ul class="event-list">
+            <div class="events-grid">
                 <% tournaments.forEach(tournament => { %>
-                    <li class="event-item">
-                        <a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a>
+                    <div class="event-card">
+                        <h2><a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a></h2>
                         <p><strong>Sport:</strong> <%= tournament.sport %></p>
                         <p><strong>Location:</strong> <%= tournament.location %></p>
                         <p><strong>Start:</strong> <%= tournament.startDate.toLocaleString() %></p>
+                        <p><strong>Participants:</strong> <%= tournament.participants.length %> / <%= tournament.teamSize %></p>
                         <% if (tournament.completed) { %>
                             <span class="status ended">Ended</span>
                         <% } else if (tournament.participants.length >= tournament.teamSize) { %>
                             <span class="status full">Full</span>
+                        <% } else { %>
+                            <span class="status open">Open</span>
                         <% } %>
-                    </li>
+                    </div>
                 <% }) %>
-            </ul>
+            </div>
         <% } else { %>
-            <p>No tournaments available.</p>
+            <p class="no-events">No tournaments available yet. Create one to kick things off!</p>
         <% } %>
-        <%- include('../partials/weather', { location: tournament.location || 'San Francisco' }) %>
+        <%- include('../partials/weather', { location: tournaments.length > 0 ? tournaments[0].location : 'San Francisco' }) %>
     </div>
     <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>

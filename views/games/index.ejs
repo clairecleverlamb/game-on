@@ -11,26 +11,30 @@
     <%- include('../partials/subheader', { pageTitle: 'All Games', backLink: '/' }) %>
     <%- include('../partials/sidebar') %>
     <div class="index-container">
-        <h1>All Games</h1>
+        <h1>Explore All Games</h1>
+        <p class="index-intro">Find and join exciting games happening near you!</p>
         <% if (games && games.length > 0) { %>
-            <ul class="event-list">
+            <div class="events-grid">
                 <% games.forEach(game => { %>
-                    <li class="event-item">
-                        <a href="/games/<%= game._id %>"><%= game.sport %></a>
+                    <div class="event-card">
+                        <h2><a href="/games/<%= game._id %>"><%= game.sport %></a></h2>
                         <p><strong>Location:</strong> <%= game.location %></p>
                         <p><strong>Time:</strong> <%= game.time.toLocaleString() %></p>
+                        <p><strong>Players:</strong> <%= game.participants.length %> / <%= game.maxPlayers %></p>
                         <% if (game.completed) { %>
                             <span class="status ended">Ended</span>
                         <% } else if (game.participants.length >= game.maxPlayers) { %>
                             <span class="status full">Full</span>
+                        <% } else { %>
+                            <span class="status open">Open</span>
                         <% } %>
-                    </li>
+                    </div>
                 <% }) %>
-            </ul>
+            </div>
         <% } else { %>
-            <p>No games available.</p>
+            <p class="no-events">No games available yet. Create one to get started!</p>
         <% } %>
-        <%- include('../partials/weather', { location: game.location || 'San Francisco' }) %>
+        <%- include('../partials/weather', { location: games.length > 0 ? games[0].location : 'San Francisco' }) %>
     </div>
     <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>

@@ -1,83 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= game.sport %> - Game On Sports Connect</title>
     <link rel="stylesheet" href="/css/style.css">
-    <title><%= game.sport %> - Game On</title>
 </head>
-
 <body>
     <%- include('../partials/header') %>
     <%- include('../partials/subheader', { pageTitle: game.sport, backLink: '/games' }) %>
     <%- include('../partials/sidebar') %>
-    <div class="game-container">
-    <h1><%= game.sport %></h1>
-    <% if (game.completed) { %>
-        <p style="color: red;">This game has ended.</p>
-    <% } else if (game.participants.length >= game.maxPlayers) { %>
-        <p style="color: orange;">This game is full.</p>
-    <% } %>
-    <p>
-        <strong>Location:</strong><%= game.location %>
-    </p>
-    <p>
-        <strong>Time:</strong><%= game.time.toLocaleString() %>
-    </p>
-    <p><strong>Skill Level:</strong>
-        <%= game.skillLevel %>
-    </p>
-    <p><strong>Max Players:</strong>
-        <%= game.maxPlayers %>
-    </p>
-    <p><strong>Status:</strong>
-        <%= game.status %>
-    </p>
-    <p><strong>Description:</strong>
-        <%= game.description || 'No description provided.' %>
-    </p>
-    <p><strong>Creator:</strong>
-        <%= game.creator.username %>
-    </p>
-    <p><strong>Participants:</strong>
-        <%= game.participants.map(p=> p.username).join(', ') %>
-    </p>
-    <% if (game.winner) { %>
-        <p><strong>Winner:</strong> <%= game.winner.username %></p>
-      <% } %>
-
-    <% if (user && !game.participants.some(p=> p._id.toString() === user._id.toString()) && game.participants.length
-    < game.maxPlayers && game.status==='Open' ) { %>
-        <form action="/games/<%= game._id %>/join" method="POST">
-          <button type="submit">Join Game</button>
-        </form>
-    <% } %>
-
-    <% if (user && game.participants.some(p => p._id.toString() === user._id.toString()) && game.creator._id.toString() !== user._id.toString()) { %>
-        <form action="/games/<%= game._id %>/leave" method="POST">
-          <button type="submit">Leave Game</button>
-        </form>
-    <% } %>
-
-    <% if (user && game.creator._id.toString()===user._id.toString()) { %>
-        <a href="/games/<%= game._id %>/edit">Edit</a>
-        <form action="/games/<%= game._id %>?_method=DELETE" method="POST">
-            <button type="submit">Delete</button>
-        </form>
-        <% if (!game.winner && game.time < new Date()) { %>
-          <form action="/games/<%= game._id %>/set-winner" method="POST">
-            <label for="winnerId">Select Winner:</label>
-            <select name="winnerId" required>
-              <% game.participants.forEach(participant => { %>
-                <option value="<%= participant._id %>"><%= participant.username %></option>
-              <% }) %>
-            </select>
-            <button type="submit">Set Winner</button>
-          </form>
-        <% } %>
-    <% } %>
-    <%- include('../partials/weather', { location: game.location }) %>
+    <div class="show-container">
+        <div class="event-details">
+            <h1><%= game.sport %></h1>
+            <p class="event-status">
+                <% if (game.completed) { %>
+                    <span class="status ended">This game has ended</span>
+                <% } else if (game.participants.length >= game.maxPlayers) { %>
+                    <span class="status full">This game is full</span>
+                <% } else { %>
+                    <span class="status open">Open to join!</span>
+                <% } %>
+            </p>
+            <div class="details-grid">
+                <p><strong>Location:</strong> <%= game.location %></p>
+                <p><strong>Time:</strong> <%= game.time.toLocaleString() %></p>
+                <p><strong>Skill Level:</strong> <%= game.skillLevel %></p>
+                <p><strong>Max Players:</strong> <%= game.maxPlayers %></p>
+                <p><strong>Status:</strong> <%= game.status %></p>
+                <p><strong>Creator:</strong> <%= game.creator.username %></p>
+                <p><strong>Participants:</strong> <%= game.participants.map(p => p.username).join(', ') %></p>
+                <% if (game.winner) { %>
+                    <p><strong>Winner:</strong> <%= game.winner.username %></p>
+                <% } %>
+                <p class="description"><strong>Description:</strong> <%= game.description || 'No description provided.' %></p>
+            </div>
+            <div class="action-buttons">
+                <% if (user && !game.participants.some(p => p._id.toString() === user._id.toString()) && game.participants.length < game.maxPlayers && game.status === 'Open' && !game.completed) { %>
+                    <form action="/games/<%= game._id %>/join" method="POST">
+                        <button type="submit" class="join-button">Join Game</button>
+                    </form>
+                <% } %>
+                <% if (user && game.participants.some(p => p._id.toString() === user._id.toString()) && game.creator._id.toString() !== user._id.toString() && !game.completed) { %>
+                    <form action="/games/<%= game._id %>/leave" method="POST">
+                        <button type="submit" class="leave-button">Leave Game</button>
+                    </form>
+                <% } %>
+                <% if (user && game.creator._id.toString() === user._id.toString()) { %>
+                    <a href="/games/<%= game._id %>/edit" class="edit-link">Edit</a>
+                    <form action="/games/<%= game._id %>?_method=DELETE" method="POST" class="delete-form">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                    <% if (!game.winner && game.time < new Date()) { %>
+                        <form action="/games/<%= game._id %>/set-winner" method="POST" class="set-winner-form">
+                            <label for="winnerId">Select Winner:</label>
+                            <select name="winnerId" required>
+                                <% game.participants.forEach(participant => { %>
+                                    <option value="<%= participant._id %>"><%= participant.username %></option>
+                                <% }) %>
+                            </select>
+                            <button type="submit" class="set-winner-button">Set Winner</button>
+                        </form>
+                    <% } %>
+                <% } %>
+            </div>
+            <%- include('../partials/weather', { location: game.location }) %>
+        </div>
     </div>
     <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>
