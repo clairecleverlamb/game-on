@@ -45,12 +45,16 @@ app.use(passport.session());
 app.use(passUserToView); 
 
 
-// regular sign in with username + password
-app.get('/', (req, res) => {
-  if (req.session.user) {
-    res.redirect('/users');
-  } else {
-    res.render('index.ejs');
+app.get('/', async (req, res) => {
+  try {
+    const now = new Date();
+    const games = await Game.find({ completed: false, time: { $gte: now } }).limit(3);
+    const tournaments = await Tournament.find({ completed: false, startDate: { $gte: now } }).limit(3);
+    const celebrities = await User.find().sort({ 'stats.wins': -1 }).limit(3); 
+    res.render('index.ejs', { games, tournaments, celebrities });
+  } catch (error) {
+    console.log(error);
+    res.render('index.ejs', { games: [], tournaments: [], celebrities: [] });
   }
 });
 
