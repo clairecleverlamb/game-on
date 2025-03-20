@@ -1,14 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game On Sports Connect</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <h1>Now it is Your Game On</h1>
-  <p>Connect with fellow athletes & sports enthusiasts </p>
-  <a href="/auth/sign-up">Sign up</a>
-  <a href="/auth/sign-in">Sign in</a>
+    <%- include('partials/header') %>
+    <div class="homepage-container">
+        <section class="hero">
+            <h1>Welcome to Game On Sports Connect!</h1>
+            <p>Join a vibrant community of athletes and sports enthusiasts.</p>
+            <% if (!user) { %>
+                <a href="/auth/sign-up" class="cta-button">Sign Up</a>
+                <a href="/auth/sign-in" class="cta-button secondary">Sign In</a>
+            <% } else { %>
+                <a href="/games/new" class="cta-button">Create a Game</a>
+                <a href="/tournaments/new" class="cta-button secondary">Create a Tournament</a>
+            <% } %>
+        </section>
+
+        <section class="sports-gallery">
+            <h2>Explore Your Favorite Sports</h2>
+            <div class="gallery">
+                <div class="sport-item">
+                    <img src="/assets/sports/volleyball.jpg" alt="Volleyball">
+                    <p>Volleyball</p>
+                </div>
+                <div class="sport-item">
+                    <img src="/assets/sports/basketball.jpg" alt="Basketball">
+                    <p>Basketball</p>
+                </div>
+                <div class="sport-item">
+                    <img src="/assets/sports/soccer.jpg" alt="Soccer">
+                    <p>Soccer</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-preview">
+            <h2>Upcoming Events</h2>
+            <div class="events-grid">
+                <% games.slice(0, 3).forEach(game => { %>
+                    <div class="event-card">
+                        <h3><%= game.sport %></h3>
+                        <p><strong>Location:</strong> <%= game.location %></p>
+                        <p><strong>Time:</strong> <%= game.time.toLocaleString() %></p>
+                        <a href="/games/<%= game._id %>">Join Now</a>
+                    </div>
+                <% }) %>
+            </div>
+            <a href="/games" class="see-more">See All Games</a>
+            <div class="events-grid">
+                <% tournaments.slice(0, 3).forEach(tournament => { %>
+                    <div class="event-card">
+                        <h3><%= tournament.name %></h3>
+                        <p><strong>Location:</strong> <%= tournament.location %></p>
+                        <p><strong>Start:</strong> <%= tournament.startDate.toLocaleString() %></p>
+                        <a href="/tournaments/<%= tournament._id %>">Join Now</a>
+                    </div>
+                <% }) %>
+            </div>
+            <a href="/tournaments" class="see-more">See All Tournaments</a>
+        </section>
+
+        <section class="community-highlights">
+            <h2>Community Celebrities</h2>
+            <div class="celebrity-grid">
+                <% celebrities.slice(0, 3).forEach(celeb => { %>
+                    <div class="celebrity-card">
+                        <% if (celeb.profilePicture) { %>
+                            <img src="<%= celeb.profilePicture %>" alt="<%= celeb.username %>">
+                        <% } else { %>
+                            <img src="/assets/default-profile.png" alt="Default Profile">
+                        <% } %>
+                        <h3><%= celeb.username %></h3>
+                        <p><%= celeb.fullName || 'Athlete' %></p>
+                        <a href="/users/<%= celeb._id %>">View Profile</a>
+                    </div>
+                <% }) %>
+            </div>
+            <a href="/users/community" class="see-more">Meet the Community</a>
+        </section>
+    </div>
+    <%- include('partials/calendar') %>
+    <%- include('partials/footer') %>
 </body>
 </html>
