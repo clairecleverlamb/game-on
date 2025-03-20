@@ -11,8 +11,6 @@
 <%- include('../partials/subheader', { pageTitle: 'Your Profile', backLink: '/' }) %>
 <%- include('../partials/sidebar') %>
 
-<%- include('../partials/weather', { location: user.location }) %>
-
 <div class="profile-container">
   <div class="user-info">
 
@@ -53,7 +51,7 @@
       <% }) %>
     </ul>
 
-    
+
     <% if (user.highlightVideos && user.highlightVideos.length > 0) { %>
         <h3>Highlight Videos</h3>
         <% user.highlightVideos.forEach((video, index) => { %>
@@ -124,6 +122,7 @@
       <% } %>
     </div>
   </div>
+  <%- include('../partials/weather', { location: user.location || 'San Francisco' }) %>
 </div>
 <%- include('../partials/calendar') %>
 <%- include('../partials/footer') %>

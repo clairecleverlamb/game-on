@@ -28,6 +28,7 @@
         </form>
         <p>Already have an account? <a href="/auth/sign-in">Sign In</a></p>
         <p><a href="/">Back to Home</a></p>
+        <%- include('../partials/weather', { location: 'San Francisco' }) %>
     </div>
     <%- include('../partials/footer') %>
 </body>

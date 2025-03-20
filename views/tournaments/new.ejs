@@ -3,45 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Tournament</title>
+    <title>Create a New Tournament - Game On Sports Connect</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-   <%- include('../partials/header') %>
-   <h1>Create a New Tournament</h1>
-   <% if (typeof error !== 'undefined') { %>
-    <p style="color: red;"><%= error %></p>
-   <% } %>
-   <form action="/tournaments" method="POST">
-    <label for="name">Tournament Name:</label>
-    <input type="text" id="name" name="name" required><br>
-
-    <label for="sport">Sport:</label>
-    <input type="text" id="sport" name="sport" required><br>
-
-    <label for="location">Location:</label>
-    <input type="text" id="location" name="location" required><br>
-
-    <label for="startDate">Start Date:</label>
-    <input type="datetime-local" id="startDate" name="startDate" required><br>
-
-    <label for="endDate">End Date:</label>
-    <input type="datetime-local" id="endDate" name="endDate" required><br>
-
-    <label for="bracketType">Bracket Type:</label>
-    <select id="bracketType" name="bracketType">
-        <option value="Single Elimination">Single Elimination</option>
-        <option value="Round Robin">Round Robin</option>
-        <option value="Group Stage">Group Stage</option>
-    </select><br>
-
-    <label for="teamSize">Team Size:</label>
-    <input type="number" id="teamSize" name="teamSize" min="1" required><br>
-
-    <label for="description">Description:</label>
-    <textarea id="description" name="description"></textarea><br>
-
-    <button type="submit">Create Tournament</button>
-   </form>
-   <%- include('../partials/footer') %>
+    <%- include('../partials/header') %>
+    <%- include('../partials/subheader', { pageTitle: 'Create a New Tournament', backLink: '/tournaments' }) %>
+    <%- include('../partials/sidebar') %>
+    <div class="form-container">
+        <h1>Create Your Next Tournament</h1>
+        <p class="form-intro">Bring the community together with an epic tournament!</p>
+        <% if (typeof error !== 'undefined') { %>
+            <p class="error-message"><%= error %></p>
+        <% } %>
+        <form action="/tournaments" method="POST" class="event-form">
+            <div class="form-group">
+                <label for="name">Tournament Name:</label>
+                <input type="text" id="name" name="name" placeholder="e.g., Spike Fest" required>
+            </div>
+            <div class="form-group">
+                <label for="sport">Sport:</label>
+                <input type="text" id="sport" name="sport" placeholder="e.g., Volleyball" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" placeholder="e.g., Central Park" required>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="datetime-local" id="startDate" name="startDate" required>
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="datetime-local" id="endDate" name="endDate" required>
+            </div>
+            <div class="form-group">
+                <label for="bracketType">Bracket Type:</label>
+                <select id="bracketType" name="bracketType">
+                    <option value="Single Elimination">Single Elimination</option>
+                    <option value="Round Robin">Round Robin</option>
+                    <option value="Group Stage">Group Stage</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="teamSize">Team Size:</label>
+                <input type="number" id="teamSize" name="teamSize" min="1" placeholder="e.g., 4" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" placeholder="Details about your tournament..." rows="4"></textarea>
+            </div>
+            <button type="submit" class="create-button">Create Tournament</button>
+        </form>
+        <%- include('../partials/weather', { location: 'San Francisco' }) %>
+    </div>
+    <%- include('../partials/calendar') %>
+    <%- include('../partials/footer') %>
 </body>
 </html>

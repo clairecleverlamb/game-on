@@ -33,8 +33,9 @@
         <% } else { %>
             <p>No users found in the community.</p>
         <% } %>
+        <%- include('../partials/weather', { location: user.location || 'San Francisco' }) %>
     </div>
-
+    <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>
 </body>
 </html>

@@ -31,7 +31,9 @@
         <% } else { %>
             <p>No tournaments available.</p>
         <% } %>
+        <%- include('../partials/weather', { location: tournament.location || 'San Francisco' }) %>
     </div>
+    <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>
 </body>
 </html>

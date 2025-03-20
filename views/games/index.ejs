@@ -30,7 +30,9 @@
         <% } else { %>
             <p>No games available.</p>
         <% } %>
+        <%- include('../partials/weather', { location: game.location || 'San Francisco' }) %>
     </div>
+    <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>
 </body>
 </html>

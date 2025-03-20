@@ -14,15 +14,11 @@
     <%- include('../partials/sidebar') %>
     <div class="game-container">
     <h1><%= game.sport %></h1>
-
-    <%- include('../partials/weather', { location: game.location }) %>
-
     <% if (game.completed) { %>
         <p style="color: red;">This game has ended.</p>
     <% } else if (game.participants.length >= game.maxPlayers) { %>
         <p style="color: orange;">This game is full.</p>
     <% } %>
-
     <p>
         <strong>Location:</strong><%= game.location %>
     </p>
@@ -81,7 +77,9 @@
           </form>
         <% } %>
     <% } %>
+    <%- include('../partials/weather', { location: game.location }) %>
     </div>
+    <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>
 </body>
 </html>

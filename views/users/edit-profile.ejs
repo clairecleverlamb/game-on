@@ -4,32 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>edit profile</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <%- include('../partials/header') %>
-    <h1>Edit Your Profile</h1>
-    <form action="/users/edit?_method=PUT" method="POST">
-      <label for="fullName">Full Name:</label>
-      <input type="text" name="fullName" value="<%= user.fullName || '' %>" required><br>
+    <div class="auth-container">
+        <h1>Edit Your Profile</h1>
+        <form action="/users/edit?_method=PUT" method="POST">
+            <label for="fullName">Full Name:</label>
+            <input type="text" name="fullName" value="<%= user.fullName || '' %>" required><br>
 
-      <label for="location">Location:</label>
-      <input type="text" name="location" value="<%= user.location || '' %>"><br>
+            <label for="location">Location:</label>
+            <input type="text" name="location" value="<%= user.location || '' %>"><br>
 
-      <label for="sportsInterests">Sports Interests:</label>
-      <select name="sportsInterests">
-        <option value="Beginner" <%= user.sportsInterests === 'Beginner' ? 'selected' : '' %>>Beginner</option>
-        <option value="Intermediate" <%= user.sportsInterests === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
-        <option value="Advanced" <%= user.sportsInterests === 'Advanced' ? 'selected' : '' %>>Advanced</option>
-      </select><br>
+             <label for="sportsInterests">Sports Interests:</label>
+              <select name="sportsInterests">
+                <option value="Beginner" <%= user.sportsInterests === 'Beginner' ? 'selected' : '' %>>Beginner</option>
+                <option value="Intermediate" <%= user.sportsInterests === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
+                <option value="Advanced" <%= user.sportsInterests === 'Advanced' ? 'selected' : '' %>>Advanced</option>
+              </select><br>
 
-      <label for="profilePicture">Profile Picture URL:</label>
-      <input type="text" name="profilePicture" value="<%= user.profilePicture || '' %>"><br>  
+             <label for="profilePicture">Profile Picture URL:</label>
+             <input type="text" name="profilePicture" value="<%= user.profilePicture || '' %>"><br>  
 
-      <label for="highlightVideo">Add Highlight Video URL:</label>
-      <input type="text" id="highlightVideo" name="highlightVideo" placeholder="e.g., https://www.youtube.com/watch?v=example"><br>
-
-      <button type="submit">Save Changes</button>
-    </form>
+             <label for="highlightVideo">Add Highlight Video URL:</label>
+             <input type="text" id="highlightVideo" name="highlightVideo" placeholder="e.g., https://www.youtube.com/watch?v=example"><br>
+ 
+            <button type="submit">Save Changes</button>
+        </form>
+        <%- include('../partials/weather', { location: user.location || 'San Francisco' }) %>
+    </div>
     <%- include('../partials/footer') %>
 </body>
 </html>
