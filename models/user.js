@@ -51,6 +51,7 @@ const userSchema = mongoose.Schema({
   }],
   highlightVideos: [{
     type: String,
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
   }],
 }, {
   timestamps: true, 
