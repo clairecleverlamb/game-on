@@ -51,7 +51,8 @@ router.get('/:id', async (req, res) => {
     try {
       const game = await Game.findById(req.params.id)
         .populate('creator')
-        .populate('participants');
+        .populate('participants')
+        .populate('winner');
      if (!game) return res.status(404).send('Game not found');
      res.render('games/show.ejs', { game });
     } catch (error) {
@@ -127,7 +128,7 @@ router.post('/:id/join', isSignedIn, async (req, res) => {
       res.redirect('/games');
     }
 });
-
+// leave
 router.post('/:id/leave', isSignedIn, async (req, res) => {
     try {
       const game = await Game.findById(req.params.id);

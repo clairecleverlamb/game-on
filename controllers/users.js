@@ -61,7 +61,7 @@ router.get('/', isSignedIn, async (req, res) => {
 router.get('/community', isSignedIn, async (req, res) => {
   try {
     const users = await User.find({ _id: { $ne: req.session.user._id } })
-      .select('username fullName profilePicture'); 
+      .select('username fullName profilePicture location'); 
     res.render('users/community.ejs', {
       users,
       pageTitle: 'Community',
@@ -121,9 +121,14 @@ router.put('/edit', isSignedIn, async (req, res) => {
     user.location = req.body.location || user.location;
     user.sportsInterests = req.body.sportsInterests || user.sportsInterests;
     user.profilePicture = req.body.profilePicture || user.profilePicture;
+
     if (req.body.highlightVideo && req.body.highlightVideo.trim() !== '') { 
       user.highlightVideos = user.highlightVideos || []; 
-      user.highlightVideos.push(req.body.highlightVideo.trim());
+      user.highlightVideos.push({
+        url:req.body.highlightVideo.trim(),
+        likes:[]
+      });
+      console.log('Added video:', user.highlightVideos[user.highlightVideos.length - 1]);
     }
 
     await user.save();
@@ -155,6 +160,45 @@ router.get('/:id', isSignedIn, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.redirect('/users');
+  }
+});
+
+
+// Like a highlight video
+router.post('/:id/like/:index', isSignedIn, async (req, res) => {
+  try {
+    const userToLike = await User.findById(req.params.id);
+    const videoIndex = req.params.index;
+    if (!userToLike || videoIndex >= userToLike.highlightVideos.length) {
+      return res.redirect(`/users/${req.params.id}`);
+    }
+    const video = userToLike.highlightVideos[videoIndex];
+    if (!video.likes.includes(req.session.user._id)) {
+      video.likes.push(req.session.user._id);
+      await userToLike.save();
+    }
+    res.redirect(`/users/${req.params.id}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect(`/users/${req.params.id}`);
+  }
+});
+
+// Unlike a highlight video
+router.post('/:id/unlike/:index', isSignedIn, async (req, res) => {
+  try {
+    const userToUnlike = await User.findById(req.params.id);
+    const videoIndex = req.params.index;
+    if (!userToUnlike || videoIndex >= userToUnlike.highlightVideos.length) {
+      return res.redirect(`/users/${req.params.id}`);
+    }
+    const video = userToUnlike.highlightVideos[videoIndex];
+    video.likes = video.likes.filter(like => like.toString() !== req.session.user._id.toString());
+    await userToUnlike.save();
+    res.redirect(`/users/${req.params.id}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect(`/users/${req.params.id}`);
   }
 });
 
