@@ -73,6 +73,31 @@ router.get('/community', isSignedIn, async (req, res) => {
   }
 });
 
+// GET /users/calendar-events - Fetch calendar events
+router.get('/calendar-events', isSignedIn, async (req, res) => {
+  try {
+    const games = await Game.find({ participants: req.session.user._id, completed: false });
+    const tournaments = await Tournament.find({ participants: req.session.user._id, completed: false });
+    const events = [
+      ...games.map(g => ({
+        title: g.sport,
+        start: g.time,
+        url: `/games/${g._id}`
+      })),
+      ...tournaments.map(t => ({
+        title: t.name,
+        start: t.startDate,
+        url: `/tournaments/${t._id}`
+      }))
+    ];
+    res.json(events);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json([]);
+  }
+});
+
+
 // GET /profile/edit - Edit current user's profile
 router.get('/edit', isSignedIn, async (req, res) => {
   try {
