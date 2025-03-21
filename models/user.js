@@ -50,7 +50,7 @@ const userSchema = mongoose.Schema({
     ref: 'Tournament'
   }],
   highlightVideos: [{
-    type: String,
+    url: {type: String},
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
   }],
 }, {
