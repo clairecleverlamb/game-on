@@ -1,0 +1,101 @@
+/* /css/game-edit.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.85)), url('/assets/edit-bg.jpg') center/cover no-repeat fixed;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+  max-width: 1000px;
+  margin: 100px auto 50px;
+  padding: 40px;
+  background: linear-gradient(rgba(42, 42, 79, 0.9), rgba(77, 192, 214, 0.2)); /* Lighter blue-tinted gradient */
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.1);
+  text-align: center;
+}
+
+.form-container h1 {
+  font-size: 2rem;
+  color: #4dc0d6; /* Lighter blue from game-show.css */
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.form-intro {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #4dc0d6; /* Lighter blue */
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #38a9bf; /* Hover shade of lighter blue */
+  box-shadow: 0 0 8px rgba(77, 192, 214, 0.5);
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.create-button {
+  background-color: #4dc0d6; /* Lighter blue */
+  color: white;
+  padding: 14px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.create-button:hover {
+  background-color: #38a9bf; /* Hover shade */
+  transform: scale(1.05);
+}

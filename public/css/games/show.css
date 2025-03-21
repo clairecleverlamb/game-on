@@ -1,0 +1,192 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.show-container {
+  max-width: 1000px;
+  margin: 100px auto 50px;
+  padding: 40px;
+  background: linear-gradient(rgba(42, 42, 79, 0.8), rgba(42, 42, 79, 0.8)), url('/assets/field-bg.jpg') center/cover no-repeat;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.1);
+}
+
+.event-details {
+  text-align: center;
+}
+
+.event-details h1 {
+  font-size: 2.2rem;
+  color: #4dc0d6; /* Lighter blue (was #17a2b8) */
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  padding: 5px 0;
+  border-bottom: 2px solid #4dc0d6; /* Match lighter blue */
+}
+
+.event-status {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.status {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 20px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  min-width: 120px;
+  text-align: center;
+}
+
+.status.open {
+  background-color: #28a745;
+  color: white;
+}
+
+.status.full {
+  background-color: #dc3545;
+  color: white;
+}
+
+.status.ended {
+  background-color: #6c757d;
+  color: white;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  text-align: left;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px rgba(77, 192, 214, 0.2); /* Adjusted to lighter blue */
+}
+
+.details-grid p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.details-grid p strong {
+  color: #4dc0d6; /* Lighter blue (was #17a2b8) */
+  font-weight: 700;
+}
+
+.details-grid .description {
+  grid-column: span 2;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.join-button,
+.leave-button,
+.delete-button,
+.set-winner-button {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.join-button {
+  background-color: #4dc0d6; /* Lighter blue (was #17a2b8) */
+  color: white;
+}
+
+.join-button:hover {
+  background-color: #38a9bf; /* Slightly darker hover (was #138496) */
+  transform: scale(1.05);
+}
+
+.leave-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.leave-button:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.delete-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
+}
+
+.set-winner-form {
+  margin-top: 20px;
+}
+
+.set-winner-form label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-right: 10px;
+}
+
+.set-winner-form select {
+  padding: 8px;
+  font-size: 1rem;
+  border: 2px solid #4dc0d6; /* Lighter blue (was #17a2b8) */
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.set-winner-button {
+  background-color: #28a745;
+  color: white;
+  margin-left: 10px;
+}
+
+.set-winner-button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.edit-link {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #4dc0d6; /* Lighter blue (was #17a2b8) */
+  text-decoration: none;
+  border: 2px solid #4dc0d6; /* Match lighter blue */
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.edit-link:hover {
+  background-color: #4dc0d6; /* Lighter blue (was #17a2b8) */
+  color: white;
+  transform: scale(1.05);
+}

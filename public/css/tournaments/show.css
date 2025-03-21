@@ -1,0 +1,160 @@
+/* /css/tournament-show.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.show-container {
+  max-width: 1000px;
+  margin: 100px auto 50px;
+  padding: 40px;
+  background: linear-gradient(rgba(42, 42, 79, 0.7), rgba(42, 42, 79, 0.7)), url('/assets/field-bg2.jpg') center/cover no-repeat;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.1);
+}
+
+.event-details {
+  text-align: center;
+}
+
+.event-details h1 {
+  font-size: 2.2rem;
+  color: var(--text-color);
+  background: linear-gradient(135deg, var(--accent-color), var(--hover-accent)); /* Gold gradient */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  padding: 5px 0;
+  border-bottom: 2px dashed var(--accent-color); /* Bracket-inspired border */
+}
+
+.event-status {
+  margin-bottom: 25px;
+}
+
+.status {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.status.open {
+  background-color: #28a745;
+  color: white;
+}
+
+.status.full {
+  background-color: #dc3545;
+  color: white;
+}
+
+.status.ended {
+  background-color: #6c757d;
+  color: white;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  text-align: left;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px rgba(255, 215, 0, 0.2);
+}
+
+.details-grid p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.details-grid p strong {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.details-grid .description {
+  grid-column: span 2; /* Full width for description */
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.join-button,
+.leave-button,
+.delete-button,
+.set-winner-button {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.join-button {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+}
+
+.join-button:hover {
+  background-color: var(--hover-accent);
+  transform: scale(1.05);
+}
+
+.leave-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.leave-button:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.delete-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
+}
+
+.edit-link {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  text-decoration: none;
+  border: 2px solid var(--accent-color);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.edit-link:hover {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  transform: scale(1.05);
+}
