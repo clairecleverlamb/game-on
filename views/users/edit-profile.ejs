@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>edit profile</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/edit-profile.css">
 </head>
 <body>
     <%- include('../partials/header') %>
@@ -32,7 +34,6 @@
  
             <button type="submit">Save Changes</button>
         </form>
-        <%- include('../partials/weather', { location: user.location || 'San Francisco' }) %>
     </div>
     <%- include('../partials/footer') %>
 </body>

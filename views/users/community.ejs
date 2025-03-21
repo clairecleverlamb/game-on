@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/community.css">
     <title>Community - Game On Sports Connect</title>
 </head>
 <body>
     <%- include('../partials/header') %>
-    <%- include('../partials/subheader', { pageTitle: 'Community', backLink: '/users' }) %>
     <%- include('../partials/sidebar') %>
 
     <div class="community-container">
@@ -18,9 +19,9 @@
                 <% users.forEach(user => { %>
                     <li class="user-item">
                         <% if (user.profilePicture) { %>
-                            <img src="<%= user.profilePicture %>" alt="<%= user.username %>'s Profile Picture" width="50" height="50">
+                            <img src="<%= user.profilePicture %>" alt="<%= user.username %>'s Profile Picture" class="profile-pic">
                         <% } else { %>
-                            <img src="/assets/default-profile.png" alt="Default Profile Picture" width="50" height="50">
+                            <img src="/assets/default-profile.png" alt="Default Profile Picture" class="profile-pic">
                         <% } %>
                         <div class="user-info">
                             <h3><a href="/users/<%= user._id %>"><%= user.username %></a></h3>
@@ -31,11 +32,9 @@
                 <% }) %>
             </ul>
         <% } else { %>
-            <p>No users found in the community.</p>
+            <p class="no-users">No users found in the community.</p>
         <% } %>
-        <%- include('../partials/weather', { location: user.location || 'San Francisco' }) %>
     </div>
-    <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>
 </body>
 </html>

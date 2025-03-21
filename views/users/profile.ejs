@@ -4,126 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    
     <title>Your profile</title>
 </head>
 <body>
 <%- include('../partials/header') %>
-<%- include('../partials/subheader', { pageTitle: 'Your Profile', backLink: '/' }) %>
 <%- include('../partials/sidebar') %>
 
 <div class="profile-container">
-  <div class="user-info">
+    <div class="user-info">
+      <% if (user.profilePicture) { %>
+        <img src="<%= user.profilePicture %>" alt="Profile Picture" class="profile-pic">
+      <% } %>
+      <h1><%= user.username %></h1>
+      <% if (user.fullName) { %>
+        <p><strong><%= user.fullName %></strong></p>
+      <% } %>
+      <p><strong>Email:</strong> <%= user.email %></p>
+      <% if (user.location) { %>
+        <p><strong>Location:</strong> <%= user.location %></p>
+      <% } %>
+      <% if (user.sportsInterests) { %>
+        <p><strong>Sports Interest:</strong> <%= user.sportsInterests %></p>
+      <% } %>
+      <p><strong>Games Played:</strong> <%= user.stats.gamePlayed %></p>
+      <p><strong>Wins:</strong> <%= user.stats.wins %></p>
+  
+      <h3><%= user.fullName %>'s Games</h3>
+      <ul class="horizontal-list">
+        <% user.pastGames.filter(game => game.completed).forEach(game => { %>
+          <li>
+            <a href="/games/<%= game._id %>"><%= game.sport %></a>
+            <% if (game.winner && game.winner._id.toString() === user._id.toString()) { %> (Won) <% } %>
+          </li>
+        <% }) %>
+      </ul>
+  
+      <h3>Tournaments Joined</h3>
+      <ul class="horizontal-list">
+        <% user.tournamentJoined.forEach(tournament => { %>
+          <li>
+            <a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a>
+            <% if (tournament.completed) { %> (Ended) <% } %>
+          </li>
+        <% }) %>
+      </ul>
 
-    <% if (user.profilePicture) { %>
-      <img src="<%= `${user.profilePicture}` %>" alt="Profile Picture" width="100">
-    <% } %>
-    <h1><%= user.username %></h1>
-    <% if (user.fullName) { %>
-      <p><strong><%= user.fullName %></strong></p>
-    <% } %>
-    <p><strong>Email:</strong> <%= user.email %></p>
-    <% if (user.location) { %>
-      <p><strong>Location:</strong> <%= user.location %></p>
-    <% } %>
-    <% if (user.sportsInterests) { %>
-      <p><strong>Sports Interest:</strong> <%= user.sportsInterests %></p>
-    <% } %>
-    <p><strong>Games Played:</strong> <%= user.stats.gamePlayed %></p>
-    <p><strong>Wins:</strong> <%= user.stats.wins %></p>
-
-    <h3>Games Played</h3>
-    <ul>
-      <% user.pastGames.filter(game => game.completed).forEach(game => { %>
-        <li>
-          <a href="/games/<%= game._id %>"><%= game.sport %></a>
-          <% if (game.winner && game.winner._id.toString() === user._id.toString()) { %> (Won) <% } %>
-        </li>
-      <% }) %>
-    </ul>
-
-    <h3>Tournaments Joined</h3>
-    <ul>
-      <% user.tournamentJoined.forEach(tournament => { %>
-        <li>
-          <a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a>
-          <% if (tournament.completed) { %> (Ended) <% } %>
-        </li>
-      <% }) %>
-    </ul>
-    <% if (user.highlightVideos && user.highlightVideos.length > 0) { %>
+      <% if (user.highlightVideos && user.highlightVideos.length > 0) { %>
         <h3>Highlight Videos</h3>
-        <% user.highlightVideos.forEach((video, index) => { %>
-          <div class="video-container">
-            <% if (typeof video === 'string') { %>
-              <!-- Legacy string data -->
-              <% if (video.includes('youtube.com') || video.includes('youtu.be')) { %>
-                <iframe width="200" height="150" src="<%= video.replace('watch?v=', 'embed/') %>" frameborder="0" allowfullscreen></iframe>
-              <% } else { %>
-                <video src="<%= video %>" controls width="200"></video>
-              <% } %>
-              <p>Likes: 0 (Legacy video)</p>
-            <% } else if (video && video.url) { %>
-                
-              <% if (video.url.includes('youtube.com') || video.url.includes('youtu.be')) { %>
-                <iframe width="200" height="150" src="<%= video.url.replace('watch?v=', 'embed/') %>" frameborder="0" allowfullscreen></iframe>
-              <% } else { %>
-                <video src="<%= video.url %>" controls width="200"></video>
-              <% } %>
-              <p>Likes: <%= video.likes ? video.likes.length : 0 %></p>
-              <% if (user._id.toString() !== currentUserId.toString()) { %>
-                <% if (video.likes && video.likes.some(like => like.toString() === currentUserId.toString())) { %>
-                  <form action="/users/<%= user._id %>/unlike/<%= index %>" method="POST">
-                    <button type="submit">Unlike</button>
-                  </form>
+        <div class="video-grid">
+          <% user.highlightVideos.forEach((video, index) => { %>
+            <div class="video-container">
+              <% if (typeof video === 'string') { %>
+                <% if (video.includes('youtube.com') || video.includes('youtu.be')) { %>
+                  <iframe src="<%= video.replace('watch?v=', 'embed/') %>" frameborder="0" allowfullscreen></iframe>
                 <% } else { %>
-                  <form action="/users/<%= user._id %>/like/<%= index %>" method="POST">
-                    <button type="submit">Like</button>
-                  </form>
+                  <video src="<%= video %>" controls></video>
                 <% } %>
+                <p>Likes: 0 (Legacy video)</p>
+              <% } else if (video && video.url) { %>
+                <% if (video.url.includes('youtube.com') || video.url.includes('youtu.be')) { %>
+                  <iframe src="<%= video.url.replace('watch?v=', 'embed/') %>" frameborder="0" allowfullscreen></iframe>
+                <% } else { %>
+                  <video src="<%= video.url %>" controls></video>
+                <% } %>
+                <p>Likes: <span class="like-count"><%= video.likes ? video.likes.length : 0 %></span></p>
+                <% if (user._id.toString() !== currentUserId.toString()) { %>
+                  <div class="like-buttons">
+                    <button class="like-btn" data-liked="<%= video.likes && video.likes.some(like => like.toString() === currentUserId.toString()) ? 'true' : 'false' %>" data-index="<%= index %>" data-user-id="<%= user._id %>">❤️</button>
+                  </div>
+                <% } %>
+              <% } else { %>
+                <p>Invalid video entry</p>
               <% } %>
-            <% } else { %>
-              <!-- Malformed entry -->
-              <p>Invalid video entry</p>
-            <% } %>
+            </div>
+          <% }) %>
+        </div>
+    <% } %>
+
+      <a href="/users/edit" class="edit-profile-btn">Edit Profile</a>
+    </div>
+  
+    <div class="events">
+      <div class="create-buttons">
+        <a href="/games/new" class="create-btn">Create Game</a>
+        <a href="/tournaments/new" class="create-btn">Create Tournament</a>
+      </div>
+  
+      <div class="games-list">
+        <h2>Upcoming Games</h2>
+        <% if (games && games.length > 0) { %>
+          <div class="horizontal-grid">
+            <% games.forEach(game => { %>
+              <%- include('../partials/game-item', { game }) %>
+            <% }) %>
           </div>
-        <% }) %>
-      <% } %>
-
-
-    <a href="/users/edit">Edit Profile</a>
-  </div>
-
-  <div class="events">
-    <div class="create-buttons">
-      <a href="/games/new">Create Game</a>
-      <a href="/tournaments/new">Create Tournament</a>
-    </div>
-
-    <div class="games-list">
-      <h2>Upcoming Games</h2>
-      <% if (games && games.length > 0) { %>
-        <% games.forEach(game => { %>
-          <%- include('../partials/game-item', { game }) %>
-        <% }) %>
-      <% } else { %>
-        <p>No upcoming games yet.</p>
-      <% } %>
-    </div>
-
-    <div class="tournaments-list">
-      <h2>Upcoming Tournaments</h2>
-      <% if (tournaments && tournaments.length > 0) { %>
-        <% tournaments.forEach(tournament => { %>
-          <%- include('../partials/tournament-item', { tournament }) %>
-        <% }) %>
-      <% } else { %>
-        <p>No upcoming tournaments yet.</p>
-      <% } %>
+        <% } else { %>
+          <p>No upcoming games yet.</p>
+        <% } %>
+      </div>
+  
+      <div class="tournaments-list">
+        <h2>Upcoming Tournaments</h2>
+        <% if (tournaments && tournaments.length > 0) { %>
+          <div class="horizontal-grid">
+            <% tournaments.forEach(tournament => { %>
+              <%- include('../partials/tournament-item', { tournament }) %>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <p>No upcoming tournaments yet.</p>
+        <% } %>
+      </div>
     </div>
   </div>
-  <%- include('../partials/weather', { location: user.location || 'San Francisco' }) %>
-</div>
-<%- include('../partials/calendar') %>
-<%- include('../partials/footer') %>
+  <%- include('../partials/footer') %>
+  
+  <script>
+    document.querySelectorAll('.like-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const index = btn.dataset.index;
+        const userId = btn.dataset.userId;
+        const isLiked = btn.dataset.liked === 'true';
+        const url = isLiked ? `/users/${userId}/unlike/${index}` : `/users/${userId}/like/${index}`;
+        
+        try {
+          const response = await fetch(url, { method: 'POST' });
+          if (response.ok) {
+            const countSpan = btn.parentElement.previousElementSibling.querySelector('.like-count');
+            let count = parseInt(countSpan.textContent);
+            count = isLiked ? count - 1 : count + 1;
+            countSpan.textContent = count;
+            btn.dataset.liked = !isLiked;
+            btn.classList.toggle('liked');
+          }
+        } catch (error) {
+          console.error('Error liking/unliking:', error);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
