@@ -1,8 +1,10 @@
-<!-- views/partials/calendar.ejs -->
-<div id="calendar"></div>
 <script src="/js/fullcalendar/core.min.js"></script>
 <script src="/js/fullcalendar/daygrid.min.js"></script>
-<link rel="stylesheet" href="/css/fullcalendar.min.css">
+<!-- <link rel="stylesheet" href="/css/fullcalendar.min.css"> -->
+<link rel="stylesheet" href="/css/style.css">
+<div class="calendar-container">
+    <div id="calendar"></div>
+</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         fetch('/users/calendar-events')
@@ -30,9 +32,4 @@
     });
 </script>
 <style>
-    #calendar {
-        max-width: 300px;
-        margin: 20px;
-        position: relative;
-    }
 </style>

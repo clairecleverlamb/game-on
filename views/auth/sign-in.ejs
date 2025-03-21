@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - Game On Sports Connect</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/sign-in.css">
 </head>
 <body>
     <%- include('../partials/header') %>
-    <%- include('../partials/subheader', { pageTitle: 'Sign In', backLink: '/' }) %>
     <div class="auth-container">
         <h1>Sign In</h1>
         <% if (error) { %>
@@ -23,7 +23,6 @@
         </form>
         <p>Don't have an account? <a href="/auth/sign-up">Sign Up</a></p>
         <p><a href="/">Back to Home</a></p>
-        <%- include('../partials/weather', { location: 'San Francisco' }) %>
     </div>
     <%- include('../partials/footer') %>
 </body>

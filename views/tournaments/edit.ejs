@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Tournament - Game On Sports Connect</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/tournaments/edit.css">
+
 </head>
 <body>
     <%- include('../partials/header') %>
-    <%- include('../partials/subheader', { pageTitle: 'Edit Tournament', backLink: '/tournaments/' + tournament._id }) %>
     <%- include('../partials/sidebar') %>
     <div class="form-container">
         <h1>Edit Your Tournament</h1>
@@ -52,9 +54,7 @@
             </div>
             <button type="submit" class="create-button">Update Tournament</button>
         </form>
-        <%- include('../partials/weather', { location: tournament.location }) %>
     </div>
-    <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>
 </body>
 </html>

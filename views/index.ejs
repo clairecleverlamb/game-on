@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game On Sports Connect</title>
+    <link rel="stylesheet" href="/css/fullcalendar.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -24,7 +25,7 @@
 
         <!-- Community Highlights Section (Moved Right Under Hero) -->
         <section class="community-highlights">
-            <h2>Community Celebrities</h2>
+            <h2>Community Stars</h2>
             <div class="celebrity-grid">
                 <% celebrities.slice(0, 3).forEach(celeb => { %>
                     <div class="celebrity-card">
@@ -39,7 +40,7 @@
                     </div>
                 <% }) %>
             </div>
-            <a href="/users/community" class="see-more">Meet the Community</a>
+            <h2><a href="/users/community" class="see-more">Meet the Community</a></h2>
         </section>
 
         <!-- Sports Gallery Section (With New Sports and "... and more") -->
@@ -71,7 +72,7 @@
                     <p>Water Polo</p>
                 </div>
             </div>
-            <p class="more-sports">... and more</p>
+            <h3><p class="more-sports">... and more</p></h3>
         </section>
 
         <!-- Events Preview Section -->
@@ -87,7 +88,7 @@
                     </div>
                 <% }) %>
             </div>
-            <a href="/games" class="see-more">See All Games</a>
+            <h3><a href="/games" class="see-more">See All Games</a></h3>
             <div class="events-grid">
                 <% tournaments.slice(0, 3).forEach(tournament => { %>
                     <div class="event-card">
@@ -98,7 +99,7 @@
                     </div>
                 <% }) %>
             </div>
-            <a href="/tournaments" class="see-more">See All Tournaments</a>
+            <a href="/tournaments" class="see-more">See All Tournaments</a></h3>
         </section>
     </div>
     <%- include('partials/calendar') %>

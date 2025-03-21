@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a New Tournament - Game On Sports Connect</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/tournaments/new.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+
 </head>
 <body>
     <%- include('../partials/header') %>
-    <%- include('../partials/subheader', { pageTitle: 'Create a New Tournament', backLink: '/tournaments' }) %>
     <%- include('../partials/sidebar') %>
     <div class="form-container">
         <h1>Create Your Next Tournament</h1>
@@ -55,7 +57,6 @@
             </div>
             <button type="submit" class="create-button">Create Tournament</button>
         </form>
-        <%- include('../partials/weather', { location: 'San Francisco' }) %>
     </div>
     <%- include('../partials/calendar') %>
     <%- include('../partials/footer') %>

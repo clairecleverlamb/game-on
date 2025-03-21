@@ -50,8 +50,6 @@
         </li>
       <% }) %>
     </ul>
-
-
     <% if (user.highlightVideos && user.highlightVideos.length > 0) { %>
         <h3>Highlight Videos</h3>
         <% user.highlightVideos.forEach((video, index) => { %>
@@ -65,15 +63,15 @@
               <% } %>
               <p>Likes: 0 (Legacy video)</p>
             <% } else if (video && video.url) { %>
-              <!-- New object structure -->
+                
               <% if (video.url.includes('youtube.com') || video.url.includes('youtu.be')) { %>
                 <iframe width="200" height="150" src="<%= video.url.replace('watch?v=', 'embed/') %>" frameborder="0" allowfullscreen></iframe>
               <% } else { %>
                 <video src="<%= video.url %>" controls width="200"></video>
               <% } %>
               <p>Likes: <%= video.likes ? video.likes.length : 0 %></p>
-              <% if (user._id.toString() !== req.session.user._id.toString()) { %>
-                <% if (video.likes && video.likes.some(like => like.toString() === req.session.user._id.toString())) { %>
+              <% if (user._id.toString() !== currentUserId.toString()) { %>
+                <% if (video.likes && video.likes.some(like => like.toString() === currentUserId.toString())) { %>
                   <form action="/users/<%= user._id %>/unlike/<%= index %>" method="POST">
                     <button type="submit">Unlike</button>
                   </form>
@@ -90,6 +88,7 @@
           </div>
         <% }) %>
       <% } %>
+
 
     <a href="/users/edit">Edit Profile</a>
   </div>
