@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(rgba(26, 26, 46, 0.75), rgba(26, 26, 46, 0.8)), url('/assets/community.jpg') center/cover no-repeat fixed; 
+  color: var(--text-color); /* #EAEAEA */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, var(--accent-color), #FFD700); 
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 100px 20px 30px 270px; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px;
+  list-style: none;
+  margin: 0 20px 50px 270px; 
+  padding: 0;
+}
+
+.user-item {
+  background: rgba(42, 42, 79, 0.95); 
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid #4dc0d6; 
+  box-shadow: 0 4px 12px rgba(77, 192, 214, 0.2);
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-item:hover {
+  transform: scale(1.03);
+}
+
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-color); 
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);
+}
+
+.user-info {
+  flex: 1;
+  text-align: left;
+}
+
+.user-info h3 {
+  font-size: 1.6rem;
+  margin: 0 0 10px;
+}
+
+.user-info h3 a {
+  color: #4dc0d6; 
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.user-info h3 a:hover {
+  color: var(--accent-color);
+}
+
+.user-info p {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.user-info p strong {
+  color: var(--accent-color); 
+}
+
+.no-users {
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin: 20px 20px 50px 270px; 
+  text-align: center;
+}

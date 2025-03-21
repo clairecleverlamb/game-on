@@ -1,11 +1,11 @@
-/* CSS Variables for Easy theming */
+
 :root {
     --primary-color: #1A1A2E;      
     --secondary-color: #2B2B4F;    
     --accent-color: #FFD700;       
     --text-color: #EAEAEA;         
-    --background-color: #1A1A2E;   /* Matches body background */
-    --hover-accent: #FFC107;       /* Darker gold for hover */
+    --background-color: #1A1A2E;   
+    --hover-accent: #FFC107;       
 }
 
 
@@ -28,6 +28,7 @@ nav {
     align-items: center;
     padding: 15px 8%;
     position: fixed;
+    max-width: 1600px;
     width: 100%;
     top: 0;
     left: 0;
@@ -71,6 +72,12 @@ nav {
     transform: scaleX(1);
 }
 
+.nav-links {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px; 
+}
+
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
@@ -108,6 +115,15 @@ nav {
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 20px;
+}
+
+.hero .game-on {
+    display: inline-block;
+    animation: pulse 1.5s infinite ease-in-out;
+    background: linear-gradient(45deg, var(--accent-color), #ff8c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.7), 0 0 10px rgba(255, 140, 0, 0.5);
 }
 
 .cta-button {
@@ -233,7 +249,7 @@ nav {
 .events-preview {
     text-align: center;
     padding: 60px 20px;
-    background: var(--secondary-color);
+    background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), url('/assets/star.jpg') center/cover no-repeat; 
     border-radius: 15px;
     max-width: 90%;
     margin: 50px auto;

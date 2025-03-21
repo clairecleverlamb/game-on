@@ -1,0 +1,302 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color); 
+  color: var(--text-color); 
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 100px 20px 50px 270px; 
+  padding: 40px;
+  background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), url('/assets/stadium-texture.jpg') center/cover no-repeat;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(77, 192, 214, 0.3); 
+}
+
+.user-info, .events {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* User Info Section */
+.user-info {
+  background: rgba(42, 42, 79, 0.95); 
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2); 
+}
+
+.profile-pic {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 5px solid var(--accent-color); 
+  margin-bottom: 20px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+  transform: scale(1.05);
+}
+
+.user-info h1 {
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, var(--accent-color), #FFD700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.user-info p {
+  font-size: 1.2rem;
+  margin: 8px 0;
+}
+
+.user-info p strong {
+  color: var(--accent-color);
+}
+
+.user-info h3 {
+  font-size: 1.8rem;
+  color: #4dc0d6; 
+  margin: 25px 0 15px;
+  border-bottom: 2px solid #4dc0d6;
+  padding-bottom: 5px;
+}
+
+.horizontal-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 10px;
+  list-style: none;
+  margin: 0;
+}
+
+.horizontal-list li {
+  background: rgba(26, 26, 46, 0.9); 
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid #4dc0d6; 
+  box-shadow: 0 3px 8px rgba(77, 192, 214, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.horizontal-list li:hover {
+  transform: scale(1.05);
+  background: rgba(77, 192, 214, 0.1);
+}
+
+.horizontal-list a {
+  color: #4dc0d6; 
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.horizontal-list a:hover {
+  color: var(--accent-color); 
+}
+
+/* Highlight Videos */
+.video-grid {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 25px;
+  padding-bottom: 10px;
+}
+
+.video-container {
+  background: rgba(26, 26, 46, 0.9); 
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid var(--accent-color); 
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+  transition: transform 0.3s ease;
+  flex: 0 0 320px; 
+  min-width: 320px; 
+  text-align: center;
+}
+
+.video-container:hover {
+  transform: scale(1.03);
+}
+
+.video-container iframe,
+.video-container video {
+  width: 280px; 
+  height: 210px; 
+  border-radius: 10px;
+}
+
+.video-container p {
+  font-size: 1.2rem; 
+  margin: 10px 0;
+  color: var(--text-color);
+}
+
+.like-buttons {
+  margin-top: 10px;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  font-size: 2rem; 
+  cursor: pointer;
+  padding: 5px;
+  color: #888; 
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.like-btn:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.like-btn.liked {
+  color: #ff4444; 
+}
+
+.like-count {
+  font-weight: 700;
+  color: #4dc0d6; 
+}
+
+.edit-profile-btn {
+  display: inline-block;
+  background: linear-gradient(100deg, var(--primary-color),rgb(127, 106, 11)2); 
+  color: var(--primary-color);
+  padding: 12px 25px;
+  margin-top: 25px;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(191, 166, 27, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-profile-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+}
+
+/* Events Section */
+.events {
+  background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.7)), url('/assets/event.jpg') center/cover no-repeat;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(77, 192, 214, 0.2); 
+}
+
+.create-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.create-btn {
+  background: linear-gradient(135deg, #1d7b8e, #2b7280); 
+  color: white;
+  padding: 12px 25px;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(77, 192, 214, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.create-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(77, 192, 214, 0.5);
+}
+
+.games-list, .tournaments-list {
+  margin-top: 25px;
+  text-align: center; /* Center-align content within section */
+}
+
+.games-list h2 {
+  font-size: 2rem;
+  color: #40E0D0; /* Soft teal for Upcoming Games */
+  margin-bottom: 15px;
+  border-bottom: 2px dashed #40E0D0;
+  padding-bottom: 5px;
+}
+
+.tournaments-list h2 {
+  font-size: 2rem;
+  color: #FF7F50; /* Light coral for Upcoming Tournaments */
+  margin-bottom: 15px;
+  border-bottom: 2px dashed #FF7F50;
+  padding-bottom: 5px;
+}
+
+.horizontal-grid {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 25px;
+  padding-bottom: 10px;
+  justify-content: center; /* Center-align boxes within grid */
+}
+
+.games-list p, .tournaments-list p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+.game-item {
+  background: rgba(26, 26, 46, 0.9); /* --primary-color */
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid #40E0D0; /* Teal border */
+  box-shadow: 0 4px 12px rgba(64, 224, 208, 0.2);
+  flex: 0 0 280px;
+  min-width: 280px;
+  transition: transform 0.3s ease;
+}
+
+.tournament-item {
+  background: rgba(26, 26, 46, 0.9); /* --primary-color */
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid #FF7F50; /* Coral border */
+  box-shadow: 0 4px 12px rgba(255, 127, 80, 0.2);
+  flex: 0 0 280px;
+  min-width: 280px;
+  transition: transform 0.3s ease;
+}
+
+.game-item:hover, .tournament-item:hover {
+  transform: scale(1.03);
+}
+a {
+    color: #328390;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+  }
+  a:visited {
+    color: #e6c131; 
+  }
+  a:active {
+    color: #f3e48f; 
+  }
