@@ -1,0 +1,331 @@
+/* CSS Variables for Easy Theming */
+:root {
+    --primary-color: #1A1A2E;      
+    --secondary-color: #2B2B4F;    
+    --accent-color: #FFD700;       
+    --text-color: #EAEAEA;         
+    --background-color: #1A1A2E;   /* Matches body background */
+    --hover-accent: #FFC107;       /* Darker gold for hover */
+}
+
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Navigation */
+nav {
+    background: rgba(30, 30, 50, 0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 8%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.logo a {
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 15px;
+    padding: 8px 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+    background: url('/assets/hero-bg.jpg') center/cover no-repeat, linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-color);
+    text-align: center;
+    padding: 120px 20px;
+    margin-top: 70px;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1, .hero p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 12px 24px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--hover-accent);
+    transform: scale(1.05);
+}
+
+/* Community Highlights */
+.community-highlights {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    border-radius: 15px;
+    margin: 40px auto;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.celebrity-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.celebrity-card {
+    background: var(--primary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.celebrity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
+}
+
+.celebrity-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+}
+
+.celebrity-card h3 {
+    margin: 10px 0;
+    font-size: 1.3rem;
+    color: var(--accent-color);
+}
+
+.celebrity-card a {
+    display: block;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.celebrity-card a:hover {
+    text-decoration: underline;
+}
+
+/* Sports Gallery */
+.sports-gallery {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--secondary-color);
+    border-radius: 15px;
+    max-width: 90%;
+    margin: 50px auto;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.sport-item {
+    background: var(--primary-color);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sport-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(255, 215, 0, 0.3);
+}
+
+.sport-item img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.sport-item p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-top: 10px;
+}
+
+/* Events Preview */
+.events-preview {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--secondary-color);
+    border-radius: 15px;
+    max-width: 90%;
+    margin: 50px auto;
+}
+
+.events-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.event-card {
+    background: var(--primary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.2);
+    border: 1px solid var(--accent-color);
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
+}
+
+.event-card h3 {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.event-card p {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 8px;
+}
+
+.event-card a {
+    display: block;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.event-card a:hover {
+    text-decoration: underline;
+}
+
+/* Floating Partials (e.g., Weather, Calendar) */
+.partials {
+    position: relative;
+    z-index: 5;
+    background: var(--secondary-color);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Footer */
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.see-more {
+    display: block;
+    text-align: center;
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-top: 15px;
+    text-decoration: none;
+}
+
+.see-more:hover {
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero, .community-highlights, .sports-gallery, .events-preview {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .events-grid, .celebrity-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero {
+        padding: 80px 20px;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+}
