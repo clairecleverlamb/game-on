@@ -49,6 +49,7 @@ router.get('/', isSignedIn, async (req, res) => {
       tournaments,
       pageTitle: 'Your Profile',
       backLink: '/',
+      currentUserId: req.session.user._id,
      });
   } catch (error) {
     console.log(error);
@@ -156,6 +157,7 @@ router.get('/:id', isSignedIn, async (req, res) => {
       tournaments,
       pageTitle: `${user.username}'s Profile`,
       backLink: '/users',
+      currentUserId: req.session.user._id
     });
   } catch (error) {
     console.log(error);
