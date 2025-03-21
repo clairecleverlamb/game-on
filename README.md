@@ -24,18 +24,6 @@ Game On Sports Connect is a dynamic web application designed to bring sports ent
 - **Responsive Design**: Enjoy a seamless experience across devices with a modern, visually appealing interface.
 - **Interactive Elements**: Hover effects, animations (e.g., pulsing "Game On" title), and centered layouts for upcoming events.
 
-# Game On Sports Connect
-
-Game On Sports Connect is a dynamic web application built to bring sports enthusiasts together. Whether you're looking to join a casual game, compete in a tournament, or connect with a vibrant community of players, this platform has it all. With a sleek, sporty design and interactive features, Game On Sports Connect makes it easy to explore, participate, and showcase your athletic achievements.
-
-## Features
-- **User Profiles:** Create and edit personalized profiles with full name, location, sports interests, profile pictures, and highlight videos.
-- **Games & Tournaments:** Discover, join, and create upcoming games and tournaments with details like location, time, skill level, and participant limits.
-- **Community Hub:** Browse a list of community members, view their profiles, and connect with fellow sports lovers.
-- **Highlight Videos:** Share and like video highlights with an interactive heart (❤️) system.
-- **Responsive Design:** Enjoy a seamless experience across devices with a modern, visually appealing interface.
-- **Interactive Elements:** Hover effects, animations (e.g., pulsing "Game On" title), and centered layouts for upcoming events.
-
 ## Tech Stack
 ### Backend:
 - **Node.js:** JavaScript runtime for server-side logic.
