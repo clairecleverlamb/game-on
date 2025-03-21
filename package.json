@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "tailwindcss -i public/css/input.css -o public/css/output.css",
+  "watch": "tailwindcss -i public/css/input.css -o public/css/output.css --watch"
   },
   "repository": {
     "type": "git",
@@ -16,6 +18,7 @@
   "dependencies": {
     "@fullcalendar/core": "^6.1.15",
     "@fullcalendar/daygrid": "^6.1.15",
+    "@tailwindcss/cli": "^4.0.15",
     "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
@@ -29,5 +32,11 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "session": "^0.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "3"
   }
 }
