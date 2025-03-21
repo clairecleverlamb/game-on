@@ -1,6 +1,7 @@
 # Game On Sports Connect
 
-Game On Sports Connect is a dynamic web application designed to bring sports enthusiasts together. Whether you're looking to join a casual game, compete in a tournament, or connect with a vibrant community of players, this platform has it all. With a sleek, sporty design and interactive features, Game On Sports Connect makes it easy to explore, participate, and showcase your athletic achievements.
+
+Game On Sports Connect [ [Start App From Here](https://game-on-7e67046190a3.herokuapp.com/)] is a dynamic web application designed to bring sports enthusiasts together. Whether you're looking to join a casual game, compete in a tournament, or connect with a vibrant community of players, this platform has it all. With a sleek, sporty design and interactive features, Game On Sports Connect makes it easy to explore, participate, and showcase your athletic achievements.
 
 ## Screenshots
 **Home Page**
