@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const passport = require('../passport-config.js');
 const User = require('../models/user.js');
 
 router.get('/sign-up', (req, res) => {
@@ -63,18 +62,6 @@ router.post('/sign-in', async (req, res) => {
   }
 });
 
-router.get('/google', passport.authenticate('google', {
-  scope: ['profile', 'email'] 
-}));
-
-
-// Google callback route
-router.get('/google/callback',
-  passport.authenticate('google', { failureRedirect: '/auth/sign-in' }),
-  (req, res) => {
-    res.redirect('/');
-  }
-);
 
 
 module.exports = router;

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "build": "tailwindcss -i public/css/input.css -o public/css/output.css",
-  "watch": "tailwindcss -i public/css/input.css -o public/css/output.css --watch"
+    "watch": "tailwindcss -i public/css/input.css -o public/css/output.css --watch"
   },
   "repository": {
     "type": "git",
@@ -29,8 +29,7 @@
     "mongoose": "^8.12.1",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.3",
-    "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
     "session": "^0.1.0"
   },
   "devDependencies": {

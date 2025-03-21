@@ -10,7 +10,6 @@ const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 
 const User = require('./models/user.js');
-const passport = require('./passport-config.js');
 const cron = require('node-cron');
 const Game = require('./models/game.js');
 const Tournament = require('./models/tournament.js');
@@ -40,10 +39,7 @@ app.use(
   })
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(passUserToView); 
-
 
 app.get('/', async (req, res) => {
   try {
