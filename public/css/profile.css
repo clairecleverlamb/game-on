@@ -227,12 +227,12 @@ body {
 
 .games-list, .tournaments-list {
   margin-top: 25px;
-  text-align: center; /* Center-align content within section */
+  text-align: center; 
 }
 
 .games-list h2 {
   font-size: 2rem;
-  color: #40E0D0; /* Soft teal for Upcoming Games */
+  color: #40E0D0; 
   margin-bottom: 15px;
   border-bottom: 2px dashed #40E0D0;
   padding-bottom: 5px;
@@ -240,7 +240,7 @@ body {
 
 .tournaments-list h2 {
   font-size: 2rem;
-  color: #FF7F50; /* Light coral for Upcoming Tournaments */
+  color: #FF7F50; 
   margin-bottom: 15px;
   border-bottom: 2px dashed #FF7F50;
   padding-bottom: 5px;
@@ -252,7 +252,7 @@ body {
   overflow-x: auto;
   gap: 25px;
   padding-bottom: 10px;
-  justify-content: center; /* Center-align boxes within grid */
+  justify-content: center; 
 }
 
 .games-list p, .tournaments-list p {
@@ -261,10 +261,10 @@ body {
 }
 
 .game-item {
-  background: rgba(26, 26, 46, 0.9); /* --primary-color */
+  background: rgba(26, 26, 46, 0.9); 
   padding: 20px;
   border-radius: 15px;
-  border: 2px solid #40E0D0; /* Teal border */
+  border: 2px solid #40E0D0; 
   box-shadow: 0 4px 12px rgba(64, 224, 208, 0.2);
   flex: 0 0 280px;
   min-width: 280px;
@@ -272,10 +272,10 @@ body {
 }
 
 .tournament-item {
-  background: rgba(26, 26, 46, 0.9); /* --primary-color */
+  background: rgba(26, 26, 46, 0.9); 
   padding: 20px;
   border-radius: 15px;
-  border: 2px solid #FF7F50; /* Coral border */
+  border: 2px solid #FF7F50; 
   box-shadow: 0 4px 12px rgba(255, 127, 80, 0.2);
   flex: 0 0 280px;
   min-width: 280px;

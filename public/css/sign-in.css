@@ -1,4 +1,4 @@
-/* /css/sign-in.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 body {
@@ -27,7 +27,7 @@ body {
 }
 
 .auth-container h1 {
-  font-size: 3rem; /* Even larger heading */
+  font-size: 3rem; 
   color: var(--accent-color);
   margin-bottom: 30px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
@@ -35,7 +35,7 @@ body {
 
 .error-message {
   color: #ff4d4d;
-  font-size: 1.3rem; /* Larger error text */
+  font-size: 1.3rem; 
   margin-bottom: 25px;
   padding: 12px;
   background-color: rgba(255, 77, 77, 0.1);
@@ -45,11 +45,11 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  gap: 25px; /* More spacing */
+  gap: 25px;
 }
 
 label {
-  font-size: 1.5rem; /* Larger labels */
+  font-size: 1.5rem; 
   font-weight: 700;
   text-align: left;
   color: var(--text-color);
@@ -58,9 +58,9 @@ label {
 input[type="text"],
 input[type="password"] {
   width: 100%;
-  padding: 15px; /* Larger inputs */
-  font-size: 1.3rem; /* Larger input text */
-  border: 2px solid var(--accent-color); /* Thicker border */
+  padding: 15px; 
+  font-size: 1.3rem; 
+  border: 2px solid var(--accent-color); 
   border-radius: 6px;
   background-color: var(--primary-color);
   color: var(--text-color);
@@ -78,8 +78,8 @@ input[type="password"]:focus {
 button {
   background-color: var(--accent-color);
   color: var(--primary-color);
-  padding: 18px; /* Larger button */
-  font-size: 1.5rem; /* Larger button text */
+  padding: 18px; 
+  font-size: 1.5rem; 
   font-weight: 700;
   border: none;
   border-radius: 8px;
@@ -94,7 +94,7 @@ button:hover {
 
 .auth-container p {
   margin-top: 25px;
-  font-size: 1.2rem; /* Larger paragraph text */
+  font-size: 1.2rem; 
 }
 
 .auth-container a {

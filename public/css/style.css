@@ -302,7 +302,6 @@ nav {
     text-decoration: underline;
 }
 
-/* Floating Partials (e.g., Weather, Calendar) */
 .partials {
     position: relative;
     z-index: 5;
@@ -316,8 +315,6 @@ nav {
     justify-content: space-around;
     align-items: center;
 }
-
-/* Style the calendar container */
 
 .calendar-container {
     display: flex;
@@ -333,65 +330,64 @@ nav {
     border-radius: 10px; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     padding: 10px; 
-    margin: 0 auto; /* Center it on the page */
+    margin: 0 auto; 
 }
 
-/* Style the header (month/year and buttons) */
+
 .fc-header-toolbar {
     display: flex;
     justify-content: space-between; 
-    align-items: center; /* Vertically align them */
-    margin-bottom: 10px; /* Space below the header */
+    align-items: center; 
+    margin-bottom: 10px; 
 }
 
-/* Style all buttons */
 .fc-button {
-    margin: 0 5px; /* Add horizontal spacing between buttons */
-    padding: 5px 10px; /* Comfortable button size */
-    background-color: #333; /* Dark gray background */
-    color: #fff; /* White text for contrast */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded edges */
-    cursor: pointer; /* Hand cursor on hover */
+    margin: 0 5px; 
+    padding: 5px 10px; 
+    background-color: #333; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
 }
 
 .fc-button:hover {
-    background-color: #555; /* Slightly lighter gray on hover */
+    background-color: #555; 
 }
 
-/* Style the date numbers */
+
 .fc-daygrid-day-number {
-    font-size: 1.2rem; /* Larger font for readability */
+    font-size: 1.2rem; 
     color: #333; 
 }
 
 .fc-header-toolbar .fc-toolbar-title {
-    font-size: 1.0rem; /* Larger header text */
-    color: #333; /* Dark gray for readability */
+    font-size: 1.0rem; 
+    color: #333; 
 }
 
 
 .fc-daygrid-day {
-    background-color: #f9f9f9; /* Light gray for day cells */
-    border: 1px solid #ddd; /* Subtle borders */
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
 }
 
-/* Responsive adjustment for smaller screens */
+
 @media (max-width: 768px) {
     #calendar {
-        max-width: 100%; /* Full width on mobile */
-        padding: 5px; /* Slightly less padding */
+        max-width: 100%; 
+        padding: 5px; 
     }
     .fc-header-toolbar {
-        flex-direction: column; /* Stack header elements vertically */
-        align-items: flex-start; /* Align to the left */
+        flex-direction: column; 
+        align-items: flex-start; 
     }
     .fc-button {
-        margin: 5px 0; /* Vertical spacing for buttons */
+        margin: 5px 0; 
     }
 }
 
-/* Footer */
+
 footer {
     background: #111;
     color: white;
@@ -404,7 +400,7 @@ footer {
 }
 
 footer a {
-    color: #ffcc00; /* Bright color for contrast */
+    color: #ffcc00; 
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease-in-out;
@@ -456,7 +452,6 @@ footer::before {
     animation: fadeIn 0.8s ease-out;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .gallery {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -484,7 +479,7 @@ h2 {
     margin-top: 60px; 
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 3px solid var(--accent-color); /* Sporty underline */
+    border-bottom: 3px solid var(--accent-color); 
     display: inline-block;
 }
 
@@ -495,7 +490,7 @@ h2 {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 10px;
-    background: linear-gradient(45deg, #ff8c00, #ff4500); /* Orange gradient */
+    background: linear-gradient(45deg, #ff8c00, #ff4500); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 5px rgba(255, 140, 0, 0.6), 0 0 10px rgba(255, 69, 0, 0.5);

@@ -28,14 +28,14 @@ body {
 .event-details h1 {
   font-size: 2.2rem;
   color: var(--text-color);
-  background: linear-gradient(135deg, var(--accent-color), var(--hover-accent)); /* Gold gradient */
+  background: linear-gradient(135deg, var(--accent-color), var(--hover-accent)); 
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   padding: 5px 0;
-  border-bottom: 2px dashed var(--accent-color); /* Bracket-inspired border */
+  border-bottom: 2px dashed var(--accent-color); 
 }
 
 .event-status {
@@ -89,7 +89,7 @@ body {
 }
 
 .details-grid .description {
-  grid-column: span 2; /* Full width for description */
+  grid-column: span 2; 
 }
 
 .action-buttons {

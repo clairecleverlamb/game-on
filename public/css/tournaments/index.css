@@ -15,11 +15,11 @@ body {
 h1 {
   font-size: 2.2rem;
   color: var(--text-color);
-  background: linear-gradient(135deg, var(--accent-color), var(--hover-accent)); /* Gold gradient */
+  background: linear-gradient(135deg, var(--accent-color), var(--hover-accent)); 
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin: 100px 0 20px 270px; /* Offset by sidebar, clears header */
+  margin: 100px 0 20px 270px; 
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
@@ -27,28 +27,28 @@ h1 {
 .index-intro {
   font-size: 1.1rem;
   color: #ccc;
-  margin: 0 0 30px 270px; /* Offset by sidebar */
+  margin: 0 0 30px 270px; 
   text-align: center;
 }
 
 .events-grid {
   display: flex;
-  flex-direction: row; /* Horizontal listing */
-  overflow-x: auto; /* Horizontal scrolling */
+  flex-direction: row; 
+  overflow-x: auto; 
   gap: 20px;
-  margin-left: 270px; /* Offset by sidebar */
-  padding: 0 20px 10px; /* Padding for edges and scrollbar */
+  margin-left: 270px; 
+  padding: 0 20px 10px; 
 }
 
 .event-card {
-  background: rgba(42, 42, 79, 0.9); /* Matches previous container */
+  background: rgba(42, 42, 79, 0.9); 
   padding: 20px;
   border: 2px solid var(--accent-color);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex: 0 0 280px; /* Fixed width */
-  min-width: 280px; /* Ensures consistent size */
+  flex: 0 0 280px; 
+  min-width: 280px; 
 }
 
 .event-card:hover {
@@ -109,6 +109,6 @@ h1 {
 .no-events {
   font-size: 1.2rem;
   color: #ccc;
-  margin: 20px 0 20px 270px; /* Offset by sidebar */
+  margin: 20px 0 20px 270px; 
   text-align: center;
 }
