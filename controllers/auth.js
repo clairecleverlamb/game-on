@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const passport = require('../config/passport-config.js');
+const passport = require('../passport-config.js');
 const User = require('../models/user.js');
 
 router.get('/sign-up', (req, res) => {
