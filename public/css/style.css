@@ -316,21 +316,33 @@ nav {
     align-items: center;
 }
 
+
 .calendar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
+    background: --secondary-color;
+    padding: 2rem;
+    margin: 5rem;
+    width: auto;
+    border-radius: 10px;
 }
 
-#calendar {
-    max-width: 800px; 
-    background-color: #ffffff; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-    padding: 10px; 
-    margin: 0 auto; 
+.fc-daygrid-day {
+    background-color: #4d4f6a; 
+    border: 1px solid #ddd; 
+}
+
+
+.fc-button {
+    margin: 0 5px; 
+    padding: 5px 10px; 
+    background-color: #51556a; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+.fc-button:hover {
+    background-color: #3a6f9d; 
 }
 
 
@@ -341,51 +353,35 @@ nav {
     margin-bottom: 10px; 
 }
 
-.fc-button {
-    margin: 0 5px; 
-    padding: 5px 10px; 
-    background-color: #333; 
-    color: #fff; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-}
-
-.fc-button:hover {
-    background-color: #555; 
-}
 
 
-.fc-daygrid-day-number {
-    font-size: 1.2rem; 
-    color: #333; 
-}
+/* .calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+} */
 
-.fc-header-toolbar .fc-toolbar-title {
-    font-size: 1.0rem; 
-    color: #333; 
-}
+/* #calendar {
+    max-width: 800px; 
+    background-color: #ffffff; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    padding: 10px; 
+    margin: 0 auto; 
+} */
 
-
-.fc-daygrid-day {
-    background-color: #f9f9f9; 
-    border: 1px solid #ddd; 
+/* 
+.fc-header-toolbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 10px; 
 }
 
 
-@media (max-width: 768px) {
-    #calendar {
-        max-width: 100%; 
-        padding: 5px; 
-    }
-    .fc-header-toolbar {
-        flex-direction: column; 
-        align-items: flex-start; 
-    }
-    .fc-button {
-        margin: 5px 0; 
-    }
-}
+} */
 
 
 footer {

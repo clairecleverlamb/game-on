@@ -1,6 +1,7 @@
 <script src="/js/fullcalendar/core.min.js"></script>
 <script src="/js/fullcalendar/daygrid.min.js"></script>
-<!-- <link rel="stylesheet" href="/css/fullcalendar.min.css"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/main.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/main.min.css" />
 <link rel="stylesheet" href="/css/style.css">
 <div class="calendar-container">
     <div id="calendar"></div>
@@ -9,6 +10,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         fetch('/users/calendar-events')
             .then(response => {
+                if (response.redirected || response.status === 401 || response.response === 302) {
+                    return;
+                }
                 if (!response.ok) throw new Error('Fetch failed: ' + response.status);
                 return response.json();
             })
@@ -31,5 +35,6 @@
             .catch(error => console.error('Error loading calendar:', error));
     });
 </script>
+
 <style>
 </style>
