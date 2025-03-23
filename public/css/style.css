@@ -1,4 +1,3 @@
-
 :root {
     --primary-color: #1A1A2E;      
     --secondary-color: #2B2B4F;    
@@ -7,7 +6,6 @@
     --background-color: #1A1A2E;   
     --hover-accent: #FFC107;       
 }
-
 
 body {
     font-family: 'Inter', sans-serif;
