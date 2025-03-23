@@ -98,8 +98,8 @@ nav {
     background: url('/assets/hero-bg.jpg') center/cover no-repeat, linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--text-color);
     text-align: center;
-    padding: 120px 20px;
-    margin-top: 70px;
+    padding: 100px 10px;
+    margin-top: 10px;
     box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
 }
 
