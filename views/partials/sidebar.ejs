@@ -1,5 +1,6 @@
 
 <aside>
+  <div class="quick-links-box"></div>
     <div class="sidebar-content">
       <h3>Quick Links</h3>
       <ul>
@@ -15,4 +16,14 @@
         <% } %>
       </ul>
     </div>
+  </div>
 </aside>
+
+
+<script>
+  document.addEventListener("scroll", function() {
+    let sidebar = document.querySelector(".quick-links-box");
+    let scrollPosition = window.scrollY;
+    sidebar.style.top = (scrollPosition + 100) + "px"; 
+});
+</script>
