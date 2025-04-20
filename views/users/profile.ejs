@@ -105,6 +105,19 @@
           <p>No upcoming games yet.</p>
         <% } %>
       </div>
+
+      <div class="games-list">
+        <h2>Past Games</h2>
+        <% if (pastGames && pastGames.length > 0) { %>
+          <div class="horizontal-grid">
+            <% pastGames.forEach(game => { %>
+              <%- include('../partials/game-item', { game }) %>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <p>No past games yet.</p>
+        <% } %>
+      </div>      
   
       <div class="tournaments-list">
         <h2>Upcoming Tournaments</h2>

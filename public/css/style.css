@@ -315,52 +315,77 @@ nav {
 }
 
 
-.calendar-container {
-    background: --secondary-color;
-    padding: 2rem;
-    margin: 5rem;
-    width: auto;
+/* FullCalendar Custom Styles */
+#calendar {
+    background-color: var(--secondary-color);
     border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    color: var(--text-color);
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+.fc-header-toolbar {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
 }
 
 .fc-daygrid-day {
-    background-color: #4d4f6a; 
-    border: 1px solid #ddd; 
+    background-color: #2B2B4F;
+    color: var(--text-color);
+    border: 1px solid #444;
 }
 
+.fc-daygrid-day-number {
+    color: var(--accent-color);
+    font-weight: 600;
+    padding-right: 5px;
+}
+
+.fc-event {
+    background-color: var(--accent-color);
+    color: #1A1A2E;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 6px;
+    font-size: 0.85rem;
+}
+
+.fc-event:hover {
+    background-color: var(--hover-accent);
+    color: black;
+}
 
 .fc-button {
-    margin: 0 5px; 
-    padding: 5px 10px; 
-    background-color: #51556a; 
-    color: #fff; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
+    background-color: var(--accent-color);
+    border: none;
+    color: #1A1A2E;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .fc-button:hover {
-    background-color: #3a6f9d; 
+    background-color: var(--hover-accent);
+    color: black;
 }
 
-
-.fc-header-toolbar {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 10px; 
+.fc-button-primary:not(:disabled).fc-button-active,
+.fc-button-primary:not(:disabled):active {
+    background-color: var(--hover-accent);
+    color: black;
 }
 
-/* #calendar {
-    max-width: 800px; 
-    background-color: #ffffff; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-    padding: 10px; 
-    margin: 0 auto; 
-} */
+.fc-day-today {
+    background-color: rgba(255, 215, 0, 0.15);
+    border: 1px solid var(--accent-color);
+}
 
-
+/* footer */
 footer {
     background: #111;
     color: white;

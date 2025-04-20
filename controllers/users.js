@@ -36,6 +36,11 @@ router.get('/', isSignedIn, async (req, res) => {
       completed: false, 
       time: { $gte: now } 
     }).populate('creator');
+    const pastGames = await Game.find({
+      participants: req.session.user._id,
+      completed: true,
+      time: { $lt: now }
+    }).populate('creator');
     const tournaments = await Tournament.find({ 
       participants: req.session.user._id, 
       completed: false, 
@@ -46,6 +51,7 @@ router.get('/', isSignedIn, async (req, res) => {
     res.render('users/profile.ejs', 
     { user,
       games, 
+      pastGames,
       tournaments,
       pageTitle: 'Your Profile',
       backLink: '/',
@@ -148,12 +154,15 @@ router.get('/:id', isSignedIn, async (req, res) => {
     .populate('tournamentJoined');
     if (!user) return res.status(404).send('User not found');
 
-    const games = await Game.find({ participants: req.params.id });
+    const allGames = await Game.find({ participants: req.params.id });
+    const pastGames = allGames.filter(g => g.completed);
+    const games = allGames.filter(g => !g.completed);
     const tournaments = await Tournament.find({ participants: req.params.id });
 
     res.render('users/profile.ejs', { 
       user, 
       games, 
+      pastGames,
       tournaments,
       pageTitle: `${user.username}'s Profile`,
       backLink: '/users',
