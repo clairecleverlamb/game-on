@@ -2,6 +2,16 @@
 <nav>
     <div class="logo">
         <a href="/">Game On </a>
+        <% if (weather) { %>
+            <div class="weather-widget" style="display: inline-flex; align-items: center; margin-left: 1rem;">
+              <img src="<%= weather.icon %>" alt="<%= weather.condition %>" style="height: 24px; margin-right: 0.3rem;">
+              <span><%= weather.temp %>°F</span>
+              <% if (user?.location) { %>
+                <span style="margin-left: 0.5rem;">in <%= user.location %></span>
+              <% } %>
+            </div>
+        <% } %>             
+
     </div>
     <div class="nav-links">
         <% if (user) { %>

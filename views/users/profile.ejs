@@ -83,15 +83,19 @@
           <% }) %>
         </div>
     <% } %>
-
+    <!-- only edit users' own profile -->
+    <% if (user._id.toString() === currentUserId.toString()) { %>
       <a href="/users/edit" class="edit-profile-btn">Edit Profile</a>
+    <% } %>
     </div>
   
     <div class="events">
-      <div class="create-buttons">
-        <a href="/games/new" class="create-btn">Create Game</a>
-        <a href="/tournaments/new" class="create-btn">Create Tournament</a>
-      </div>
+      <% if (user._id.toString() === currentUserId.toString()) { %>
+        <div class="create-buttons">
+          <a href="/games/new" class="create-btn">Create Game</a>
+          <a href="/tournaments/new" class="create-btn">Create Tournament</a>
+        </div>
+      <% } %>
   
       <div class="games-list">
         <h2>Upcoming Games</h2>
