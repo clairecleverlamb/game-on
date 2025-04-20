@@ -27,7 +27,7 @@ router.post('/sign-up', async (req, res) => {
       return res.send('Password and Confirm Password must match');
     }
   
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+    const hashedPassword = await bcrypt.hashSync(req.body.password, 10);
     req.body.password = hashedPassword;
     delete req.body.confirmPassword;
     await User.create(req.body);
@@ -44,7 +44,7 @@ router.post('/sign-in', async (req, res) => {
     if (!userInDatabase) {
       return res.render('auth/sign-in.ejs', { error: 'Username or password incorrect.' });
     }
-    const validPassword = bcrypt.compareSync(
+    const validPassword = await bcrypt.compareSync(
       req.body.password,
       userInDatabase.password
     );

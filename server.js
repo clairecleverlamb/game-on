@@ -10,9 +10,10 @@ const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 
 const User = require('./models/user.js');
-const cron = require('node-cron');
 const Game = require('./models/game.js');
 const Tournament = require('./models/tournament.js');
+
+const cron = require('node-cron');
 
 const authController = require('./controllers/auth.js');
 const gamesController = require('./controllers/games.js');
@@ -26,7 +27,7 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); // simple key value pair 
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 // app.use(morgan('dev'));
