@@ -14,6 +14,7 @@ const Game = require('./models/game.js');
 const Tournament = require('./models/tournament.js');
 
 const cron = require('node-cron');
+const { updateCompletedGamesAndTournaments } = require('./utils/cron-utils');
 
 const authController = require('./controllers/auth.js');
 const gamesController = require('./controllers/games.js');
@@ -61,38 +62,8 @@ app.use('/games', gamesController);
 app.use('/tournaments', tournamentController);
 
 
-// Cron job to update completed status (runs daily at midnight)
-cron.schedule('0 0 * * *', async () => {
-  try {
-    const now = new Date();
-    const games = await Game.find({ completed: false });
-    for (const game of games) {
-      if (game.time < now) {
-        game.completed = true;
-        if (game.status !== 'Completed') {
-          game.status = 'Completed';
-        }
-        await game.save();
-      }
-    }
-
-    // Update Tournaments
-    const tournaments = await Tournament.find({ completed: false });
-    for (const tournament of tournaments) {
-      if (tournament.endDate < now) { 
-        tournament.completed = true;
-        if (tournament.status !== 'Completed') {
-          tournament.status = 'Completed';
-        }
-        await tournament.save();
-      }
-    }
-
-    console.log('Updated completion status for games and tournaments');
-  } catch (error) {
-    console.error('Cron job error:', error);
-  }
-});
+// Run the cron job every day at midnight
+cron.schedule('0 0 * * *', updateCompletedGamesAndTournaments);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
