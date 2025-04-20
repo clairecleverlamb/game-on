@@ -1,0 +1,49 @@
+<head>
+    <title><%= sport %> - Game On</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/sports.css">
+</head>
+<div class="sport-background" style="background-image: url('/assets/sports/<%= sport.toLowerCase().replace(/\s/g, '-') %>.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 4rem 2rem; min-height: 100vh;">
+    <h1 style="text-align: center; color: var(--accent-color); margin-top: 2rem;">
+      <%= sport %> Games & Tournaments
+    </h1>
+  
+    <div class="events-preview">
+      <h2>Games</h2>
+      <% if (games.length) { %>
+        <div class="events-grid">
+          <% games.forEach(g => { %>
+            <div class="event-card">
+              <a href="/games/<%= g._id %>">
+                <h3><%= sport %></h3>
+                <p><strong>Location:</strong> <%= g.location %></p>
+                <p><strong>Time:</strong> <%= new Date(g.time).toLocaleString() %></p>
+                <span class="cta-button">View Game</span>
+              </a>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p style="text-align: center;">No games found for this sport.</p>
+      <% } %>
+  
+      <h2>Tournaments</h2>
+      <% if (tournaments.length) { %>
+        <div class="events-grid">
+          <% tournaments.forEach(t => { %>
+            <div class="event-card">
+              <a href="/tournaments/<%= t._id %>">
+                <h3><%= t.name %></h3>
+                <p><strong>Location:</strong> <%= t.location %></p>
+                <p><strong>Start:</strong> <%= new Date(t.startDate).toLocaleString() %></p>
+                <span class="cta-button">View Tournament</span>
+              </a>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p style="text-align: center;">No tournaments found for this sport.</p>
+      <% } %>
+    </div>
+</div>
+  

@@ -12,6 +12,7 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 const User = require('./models/user.js');
 const Game = require('./models/game.js');
 const Tournament = require('./models/tournament.js');
+const sportsController = require('./controllers/sports.js');
 
 const cron = require('node-cron');
 const { updateCompletedGamesAndTournaments } = require('./utils/cron-utils');
@@ -60,6 +61,7 @@ app.use('/auth', authController);
 app.use('/users', userController);
 app.use('/games', gamesController);
 app.use('/tournaments', tournamentController);
+app.use('/', sportsController);
 
 
 // Run the cron job every day at midnight
