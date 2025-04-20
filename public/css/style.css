@@ -499,3 +499,14 @@ h3:hover {
     transform: scale(1.05);
     text-shadow: 0 0 10px rgba(255, 140, 0, 0.8), 0 0 20px rgba(255, 69, 0, 0.7);
 }
+
+
+.weather-widget {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+}
+  

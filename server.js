@@ -16,6 +16,7 @@ const sportsController = require('./controllers/sports.js');
 
 const cron = require('node-cron');
 const { updateCompletedGamesAndTournaments } = require('./utils/cron-utils');
+const fetchWeather = require('./utils/weather');
 
 const authController = require('./controllers/auth.js');
 const gamesController = require('./controllers/games.js');
@@ -42,7 +43,8 @@ app.use(
   })
 );
 
-app.use(passUserToView); 
+app.use(passUserToView);
+app.use(fetchWeather);
 
 app.get('/', async (req, res) => {
   try {
@@ -63,9 +65,9 @@ app.use('/games', gamesController);
 app.use('/tournaments', tournamentController);
 app.use('/', sportsController);
 
-
 // Run the cron job every day at midnight
 cron.schedule('0 0 * * *', updateCompletedGamesAndTournaments);
+
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
