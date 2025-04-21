@@ -2,6 +2,7 @@
     <title><%= sport %> - Game On</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/sports.css">
+    <%- include('../partials/header') %>
 </head>
 <div class="sport-background" style="background-image: url('/assets/sports/<%= sport.toLowerCase().replace(/\s/g, '-') %>.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 4rem 2rem; min-height: 100vh;">
     <h1 style="text-align: center; color: var(--accent-color); margin-top: 2rem;">
