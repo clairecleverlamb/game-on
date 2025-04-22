@@ -12,12 +12,12 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 const User = require('./models/user.js');
 const Game = require('./models/game.js');
 const Tournament = require('./models/tournament.js');
-const sportsController = require('./controllers/sports.js');
 
 const cron = require('node-cron');
 const { updateCompletedGamesAndTournaments } = require('./utils/cron-utils');
 const fetchWeather = require('./utils/weather');
 
+const sportsController = require('./controllers/sports.js');
 const authController = require('./controllers/auth.js');
 const gamesController = require('./controllers/games.js');
 const tournamentController = require('./controllers/tournaments.js');
