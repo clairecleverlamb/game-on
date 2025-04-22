@@ -48,10 +48,10 @@ app.use(fetchWeather);
 
 app.get('/', async (req, res) => {
   try {
-    const now = new Date();
-    const games = await Game.find({ completed: false, time: { $gte: now } }).limit(3);
-    const tournaments = await Tournament.find({ completed: false, startDate: { $gte: now } }).limit(3);
-    const celebrities = await User.find().sort({ 'stats.wins': -1 }).limit(3); 
+    const now = new Date(); // capture current time
+    const games = await Game.find({ completed: false, time: { $gte: now } }).limit(3); // fetch 3 upcoming games
+    const tournaments = await Tournament.find({ completed: false, startDate: { $gte: now } }).limit(3); 
+    const celebrities = await User.find().sort({ 'stats.wins': -1 }).limit(5); 
     res.render('index.ejs', { games, tournaments, celebrities });
   } catch (error) {
     console.log(error);

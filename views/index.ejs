@@ -27,7 +27,7 @@
         <section class="community-highlights">
             <h2>Community Stars</h2>
             <div class="celebrity-grid">
-                <% celebrities.slice(0, 3).forEach(celeb => { %>
+                <% celebrities.forEach(celeb => { %>
                     <div class="celebrity-card">
                         <% if (celeb.profilePicture) { %>
                             <img src="<%= celeb.profilePicture %>" alt="<%= celeb.username %>">
